@@ -1,11 +1,17 @@
 import Vector from "../lib/Vector";
-import {Lightning} from "wpe-lightning-sdk";
+import {Lightning, Utils} from "wpe-lightning-sdk";
 
 export default class Slicer extends Lightning.Component {
 
     static _template() {
         return {
-            rect: true, color: 0xff8f9494
+            Slicer: {
+                src: Utils.asset("assets/level/slicer-a.png")
+            },
+            Stick: {
+                y: 35, mountX: .5, x: 35,
+                src: Utils.asset("assets/level/slicer-b.png")
+            }
         };
     }
 
@@ -26,9 +32,13 @@ export default class Slicer extends Lightning.Component {
         return "slicer";
     };
 
-    act(dt) {}
+    act(dt) {
+        let sliceSpeed = Math.PI * 2;
+
+        this.tag("Slicer").rotation += sliceSpeed * dt;
+    }
 
     onTouch(player) {
-        player.speed.y = -25;
+
     }
 }

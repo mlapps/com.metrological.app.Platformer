@@ -25,11 +25,9 @@ export default class Level extends Lightning.Component {
         return {
             "@": Player,
             "c": Carrot,
-            "j": Jumper,
+            "^": Jumper,
             'o': Slicer,
-            "=": Lava,
-            "|": Lava,
-            "v": Lava
+            "!": Lava
         };
     }
 
@@ -70,9 +68,9 @@ export default class Level extends Lightning.Component {
                     this.decorators.push(d);
                 } else if (ch == "x") {
                     fieldType = "floor";
-                } else if (ch == "l") {
+                } else if (ch == "(") {
                     fieldType = "floor-left";
-                } else if (ch == "r") {
+                } else if (ch == ")") {
                     fieldType = "floor-right";
                 } else if (ch == "i") {
                     fieldType = "wall";
@@ -94,8 +92,6 @@ export default class Level extends Lightning.Component {
 
         if (xStart < 0 || xEnd > this.width || yStart < 0) {
             return "wall";
-        } else if (yEnd > this.height) {
-            return "lava";
         }
         for (let y = yStart; y < yEnd; y++) {
             for (let x = xStart; x < xEnd; x++) {
@@ -138,6 +134,8 @@ export default class Level extends Lightning.Component {
         } else if(type === "jumper"){
             actor.onTouch(player);
         }else if(type === "slicer"){
+            this.signal("playerDied");
+        }else if(type === "lava"){
             this.signal("playerDied");
         }
     }
