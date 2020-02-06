@@ -7,8 +7,8 @@ export default class Wall extends Lightning.Component {
     }
 
     _init() {
-        const index = Math.floor((Math.random() * 4) + 1);
-        this.src = Utils.asset(`assets/level/center-${index}.png`);
+        const index = Math.floor((Math.random() * 2) + 1);
+        this.src = Utils.asset(`assets/level/wall-${index}.png`);
     }
 
     set pos(v) {

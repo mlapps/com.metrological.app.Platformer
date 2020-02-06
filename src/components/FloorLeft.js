@@ -1,14 +1,13 @@
 import {Lightning, Utils} from "wpe-lightning-sdk";
 import Vector from "../lib/Vector";
 
-export default class Floor extends Lightning.Component {
+export default class FloorLeft extends Lightning.Component {
     static _template() {
         return {};
     }
 
     _init() {
-        const index = Math.floor((Math.random() * 4) + 1);
-        this.src = Utils.asset(`assets/level/floor-${index}.png`);
+        this.src = Utils.asset(`assets/level/floor-left-${1}.png`);
     }
 
     set pos(v) {
@@ -20,8 +19,8 @@ export default class Floor extends Lightning.Component {
     }
 
     static get size() {
-        return Floor.prototype.size;
+        return FloorLeft.prototype.size;
     }
 }
 
-Floor.prototype.size = new Vector(1, 1);
+FloorLeft.prototype.size = new Vector(1, 1);

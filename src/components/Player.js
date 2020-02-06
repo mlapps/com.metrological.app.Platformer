@@ -151,7 +151,7 @@ export default class Player extends Lightning.Component {
     }
 
     static get playerColor() {
-        return 0xff19AAA7;
+        return 0xffFFC42A;
     }
 
     _construct() {

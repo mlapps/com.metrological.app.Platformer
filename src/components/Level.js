@@ -6,7 +6,6 @@ export default class Level extends Lightning.Component {
 
     static _template() {
         return {
-            Image: {},
             Assets: {},
             Decorators: {},
             Actors: {}
@@ -70,6 +69,10 @@ export default class Level extends Lightning.Component {
                     this.decorators.push(d);
                 } else if (ch == "x") {
                     fieldType = "floor";
+                } else if (ch == "l") {
+                    fieldType = "floor-left";
+                } else if (ch == "r") {
+                    fieldType = "floor-right";
                 } else if (ch == "i") {
                     fieldType = "wall";
                 } else if (ch == "!") {

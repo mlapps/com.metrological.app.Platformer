@@ -6,6 +6,9 @@ import levels from "./lib/gameLevels";
 export default class Game extends Lightning.Component {
     static _template() {
         return {
+            Background: {
+                rect: true, w: 1920, h: 1080, colorTop: 0xff38769f, colorBottom: 0xff363358
+            },
             Level: {},
             Player: {},
             Statistics: {

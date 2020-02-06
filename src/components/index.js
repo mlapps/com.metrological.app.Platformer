@@ -6,6 +6,8 @@ export {default as Wall} from './Wall';
 export {default as Floor} from './Floor';
 export {default as Slicer} from './Slicer';
 export {default as Jumper} from './Jumper';
+export {default as FloorLeft} from './FloorLeft';
+export {default as FloorRight} from './FloorRight';
 export {default as Plant} from './Plant';
 export {default as Assets} from './Assets';
 export {default as Lives} from './Lives';

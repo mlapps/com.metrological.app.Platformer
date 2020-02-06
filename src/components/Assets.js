@@ -1,9 +1,11 @@
-import {Wall, Lava, Floor} from "./";
+import {Wall, Lava, Floor, FloorLeft, FloorRight} from "./";
 
 const types = new Map([
     ["wall", Wall],
     ["lava", Lava],
     ["floor", Floor],
+    ["floor-left", FloorLeft],
+    ["floor-right", FloorRight]
 ]);
 
 export default {
