@@ -1,5 +1,5 @@
 import {Lightning} from "wpe-lightning-sdk";
-import {Player, Carrot, Lava, Plant} from './';
+import {Player, Carrot, Lava, Plant, Jumper} from './';
 import Vector from "../lib/Vector";
 
 export default class Level extends Lightning.Component {
@@ -25,6 +25,7 @@ export default class Level extends Lightning.Component {
         return {
             "@": Player,
             "c": Carrot,
+            "j": Jumper,
             "=": Lava,
             "|": Lava,
             "v": Lava
@@ -65,7 +66,6 @@ export default class Level extends Lightning.Component {
                     const d = this.stage.c({
                         type: Decorator, pos: new Vector(x, y), ch
                     });
-
                     this.decorators.push(d);
                 } else if (ch == "x") {
                     fieldType = "floor";
@@ -130,6 +130,8 @@ export default class Level extends Lightning.Component {
             })) {
                 this.signal("playerFinished");
             }
+        } else if( type === "jumper"){
+            actor.onTouch(player);
         }
     }
 
