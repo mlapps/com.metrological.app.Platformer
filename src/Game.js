@@ -1,4 +1,4 @@
-import {Level, Wall, Assets, Player} from "./components";
+import {Level, Wall, Assets, Player, Lives, CarrotsLeft} from "./components";
 import {Lightning, Settings} from "wpe-lightning-sdk";
 import levels from "./lib/gameLevels";
 
@@ -6,16 +6,21 @@ import levels from "./lib/gameLevels";
 export default class Game extends Lightning.Component {
     static _template() {
         return {
-            Level:{
-
-            },
-            Player:{
-
+            Level: {},
+            Player: {},
+            Statistics: {
+                x: 50, y: 50,
+                Lives: {
+                    type: Lives
+                },
+                CarrotsLeft: {
+                    type: CarrotsLeft, y: 50
+                }
             }
         };
     }
 
-    _construct(){
+    _construct() {
         /**
          * Tilesize
          * @type {number}
@@ -41,32 +46,34 @@ export default class Game extends Lightning.Component {
             left: false,
             right: false,
             up: false,
-            down:false
+            down: false
         };
 
-        this.updateListener = () =>{
+        this.updateListener = () => {
             this.loop();
         };
+
+        this.lives = 10;
     }
 
-    _init(){
+    _init() {
         this.createNewRound();
 
-        if(Settings.get("app", "showGrid")){
+        if (Settings.get("app", "showGrid")) {
             this.renderDebugGrid();
         }
     }
 
-    _active(){
+    _active() {
         this._setState("Playing");
     }
 
-    createNewRound(){
+    createNewRound() {
         this._setState("Setup");
         // create and hold level reference
         const level = this.stage.c({
-            type: Level, plan: levels[~~(Math.random()*levels.length)], lives:5, signals:{
-                playerDied: true, playerFinished: true
+            type: Level, plan: levels[~~(Math.random() * levels.length)], lives: 5, signals: {
+                playerDied: true, playerFinished: true, carrotGrab: true
             }
         });
 
@@ -74,26 +81,27 @@ export default class Game extends Lightning.Component {
         // a level controller to populate a position in the rendertree
         // but for now we do it to showcase Lightnings capabilities
         // and not having to use event emitters for communication
-        this.tag("Level").children = [level]
+        this.tag("Level").children = [level];
 
-        this.renderLevel(level, true );
+        this.renderLevel(level, true);
         this.renderActors(level);
+        this.updateStatistics(level);
 
         // reset keys
         this.keys = {
             left: false,
             right: false,
             up: false,
-            down:false
+            down: false
         };
     }
 
-    renderLevel(level, override=false){
-        if(override){
+    renderLevel(level, override = false) {
+        if (override) {
             this.level = level;
         }
 
-        let children =[];
+        let children = [];
         let view = this.level.grid;
         let xStart = 0;
         let xEnd = view[0].length;
@@ -124,15 +132,15 @@ export default class Game extends Lightning.Component {
         this.level.fill("Assets", children);
     }
 
-    renderActors(level){
-        const children = level.actors.map((actor)=>{
+    renderActors(level) {
+        const children = level.actors.map((actor) => {
             actor.x = actor.pos.x * this.levelScale;
             actor.y = actor.pos.y * this.levelScale;
             actor.w = this.levelScale;
             actor.h = this.levelScale;
 
-            if(actor.constructor === Player){
-                actor.h = 75*1.5;
+            if (actor.constructor === Player) {
+                actor.h = 75 * 1.5;
                 this.player = actor;
                 return false;
             }
@@ -144,6 +152,12 @@ export default class Game extends Lightning.Component {
 
         // populate actores
         this.level.fill("Actors", children);
+    }
+
+    updateStatistics(level) {
+        this.tag("Lives").set(this.lives);
+        this.tag("CarrotsLeft").set(level.carrots);
+        console.log(level.carrots)
     }
 
     updateViewport() {
@@ -168,112 +182,119 @@ export default class Game extends Lightning.Component {
         this.level.x = -this.viewport.x * this.levelScale;
     }
 
-    loop(){
+    loop() {
         // update level
         this.level.step(this.stage.dt, this.viewport);
 
         // update player
-        this.player.act(this.stage.dt, this.level, this.keys, this.viewport)
+        this.player.act(this.stage.dt, this.level, this.keys, this.viewport);
 
         // update viewport
-        this.updateViewport()
+        this.updateViewport();
     }
 
     static _states() {
         return [
-            class Setup extends this{
+            class Setup extends this {
 
             },
-            class Playing extends this{
-                $enter(){
-                    this.stage.on("frameStart", this.updateListener)
+            class Playing extends this {
+                $enter() {
+                    this.stage.on("frameStart", this.updateListener);
                 }
-                $exit(){
-                    this.stage.off("frameStart", this.updateListener)
+
+                $exit() {
+                    this.stage.off("frameStart", this.updateListener);
                 }
-                playerDied(){
-                    this._lives -=1;
+
+                playerDied() {
+                    this.lives -= 1;
+                    this.tag("Lives").set(this.lives);
                     this.player.die();
                 }
 
-                playerFinished(){
-                    this._setState("Win")
+                carrotGrab() {
+                    this.tag("CarrotsLeft").set(this.level.carrots);
                 }
 
-                _handleLeft(){
+                playerFinished() {
+                    this._setState("Win");
+                }
+
+                _handleLeft() {
                     this.keys.left = true;
                 }
 
-                _handleLeftRelease(){
+                _handleLeftRelease() {
                     this.keys.left = false;
                 }
 
-                _handleRight(){
+                _handleRight() {
                     this.keys.right = true;
                 }
 
-                _handleRightRelease(){
+                _handleRightRelease() {
                     this.keys.right = false;
                 }
 
-                _handleUp(){
+                _handleUp() {
                     this.keys.up = true;
                 }
 
-                _handleUpRelease(){
+                _handleUpRelease() {
                     this.keys.up = false;
                 }
 
-                _handleDown(){
+                _handleDown() {
                     this.keys.down = true;
                 }
 
-                _handleDownRelease(){
+                _handleDownRelease() {
                     this.keys.down = false;
                 }
             },
-            class Paused extends this{
+            class Paused extends this {
 
             },
-            class Win extends this{
-                $enter(){
+            class Win extends this {
+                $enter() {
                     this.signal("won");
                 }
             },
-            class Lost extends this{
+            class Lost extends this {
 
             }
         ];
     }
 
-    renderDebugGrid(){
-        const c = new Array(40).fill("").map((el, idx)=>{
+    renderDebugGrid() {
+        const c = new Array(40).fill("").map((el, idx) => {
             return {
-                type:Line, y: idx*40
-            }
+                type: Line, y: idx * 40
+            };
         });
-        const d = new Array(60).fill("").map((el, idx)=>{
+        const d = new Array(60).fill("").map((el, idx) => {
             return {
-                type:Line, x: idx*40, h:1080, w:1
-            }
-        })
+                type: Line, x: idx * 40, h: 1080, w: 1
+            };
+        });
         this.patch({
-            Grid:{
-                alpha: 0.5, children:[...c, ...d]
+            Grid: {
+                alpha: 0.5, children: [...c, ...d]
             }
         });
         this.tag("Grid").animation({
-            duration:10, repeat:-1, actions:[
-                {p:'alpha', v:{0:0.5,0.3:0, 1:0.5}}
+            duration: 10, repeat: -1, actions: [
+                {p: 'alpha', v: {0: 0.5, 0.3: 0, 1: 0.5}}
             ]
         }).start();
     }
 }
 
-class Line extends Lightning.Component{
-    static _template(){
+class Line extends Lightning.Component {
+    static _template() {
         return {
-            rect:true, h:1, w:1920
-        }
+            rect: true, h: 1, w: 1920
+        };
     }
 }
