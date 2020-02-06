@@ -1,14 +1,17 @@
-export default class Lives {
-    constructor(pos) {
-        this.pos = pos;
-        this.size = new Vector(1, 1);
-        this.type = "lives";
+import {Lightning} from "wpe-lightning-sdk";
+
+export default class Lives extends Lightning.Component {
+    static _template(){
+        return {
+            Label:{
+                text:{text:''}
+            }
+        }
     }
 
-    type() {
-        return this.type;
+    set(v){
+        this._lives = v;
+        this.tag("Label").text.text = `Lives: ${v}`;
     }
 
-    act() {
-    }
 }
