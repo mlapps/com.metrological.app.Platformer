@@ -165,9 +165,11 @@ export default class Player extends Lightning.Component {
 
         this.createAnimations();
 
-        this.blink();
-
         this._setState("Idle");
+    }
+
+    _active() {
+        this.blink();
     }
 
     // plus 0, -0.5

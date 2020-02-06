@@ -44,7 +44,7 @@ export default class Carrot extends Lightning.Component {
         this.pos = this.basePos.plus(new Vector(0, wobblePos));
 
         this.x = (this.pos.x) * 75;
-        this.y = (this.pos.y) * 75;
+        this.y = (this.pos.y - 0.8) * 75;
     }
 
     onTouch(player) {
