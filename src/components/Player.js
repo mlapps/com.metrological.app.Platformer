@@ -222,7 +222,7 @@ export default class Player extends Lightning.Component {
         }
 
         // @todo: remove magic number
-        this.y = (this.pos.y - 0.5) * 75;
+        this.y = (this.pos.y - 0.85) * 75;
     }
 
     act(step, level, keys, viewport) {
