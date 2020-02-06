@@ -3,12 +3,12 @@ import Vector from "../lib/Vector";
 
 export default class Wall extends Lightning.Component {
     static _template() {
-        return {
-            src: Utils.asset("test1.png")
-        };
+        return {};
     }
 
     _init() {
+        const index = Math.floor((Math.random() * 4) + 1);
+        this.src = Utils.asset(`assets/level/center-${index}.png`);
     }
 
     set pos(v) {

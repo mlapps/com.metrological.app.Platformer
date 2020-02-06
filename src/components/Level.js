@@ -1,5 +1,5 @@
 import {Lightning} from "wpe-lightning-sdk";
-import {Player, Carrot, Lava} from './';
+import {Player, Carrot, Lava, Plant} from './';
 import Vector from "../lib/Vector";
 
 export default class Level extends Lightning.Component {
@@ -58,6 +58,8 @@ export default class Level extends Lightning.Component {
                     fieldType = "wall";
                 } else if (ch == "!") {
                     fieldType = "lava";
+                } else if (ch == "p") {
+                    fieldType = "plant";
                 }
                 gridLine.push(fieldType);
             }

@@ -1,11 +1,16 @@
 import Vector from "../lib/Vector";
-import {Lightning} from "wpe-lightning-sdk";
+import {Lightning, Utils} from "wpe-lightning-sdk";
 
 export default class Carrot extends Lightning.Component {
 
     static _template() {
         return {
-            rect: true, w: 40, h: 40, color: 0xffd94d0f
+            src: Utils.asset("assets/level/carrot.png"),
+            w: 2, h: 2,
+            transitions: {
+                alpha: {duration: .6, timingFunction: 'cubic-bezier(0.20, 1.00, 0.80, 1.00)'},
+                scale: {duration: .6, timingFunction: 'cubic-bezier(0.20, 1.00, 0.80, 1.00)'}
+            }
         };
     }
 
@@ -33,7 +38,7 @@ export default class Carrot extends Lightning.Component {
 
     act(dt) {
         let wobbleSpeed = 8;
-        let wobbleDist = 0.07;
+        let wobbleDist = 0.1;
         this.wobble += dt * wobbleSpeed;
         let wobblePos = Math.sin(this.wobble) * wobbleDist;
         this.pos = this.basePos.plus(new Vector(0, wobblePos));
@@ -46,7 +51,7 @@ export default class Carrot extends Lightning.Component {
         // @todo: infect player
         this.patch({
             smooth: {
-                alpha: 0, scale: 1.2
+                alpha: 0, scale: .2
             }
         });
     }
