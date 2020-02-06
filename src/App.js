@@ -84,7 +84,7 @@ export default class App extends Lightning.Component {
             class Video extends this {
                 $enter() {
                     this.tag("Player").setSmooth("alpha", 1);
-                    this.tag("Player").play("http://video.metrological.com/sea.mp4");
+                    this.tag("Player").play("http://video.metrological.com/epicbunnytale.mp4");
                 }
 
                 $exit() {

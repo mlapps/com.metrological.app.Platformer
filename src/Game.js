@@ -119,10 +119,8 @@ export default class Game extends Lightning.Component {
                     continue;
                 } else {
                     const construct = Assets.get(tile);
-
                     const screenX = x * this.levelScale;
                     const screenY = y * this.levelScale;
-                    console.log(tile, construct)
                     const w = construct.size.x * this.levelScale;
                     const h = construct.size.y * this.levelScale;
 
@@ -183,7 +181,7 @@ export default class Game extends Lightning.Component {
     updateViewport() {
         let view = this.viewport;
         let xMargin = view.w / 3;
-        let yMArgin = view.h / 3;
+        let yMargin = view.h / 3;
         let player = this.player;
         let center = player.pos.plus(player.size.times(0.5));
 
@@ -193,10 +191,10 @@ export default class Game extends Lightning.Component {
             view.x = Math.min(center.x + xMargin - view.w,
                 this.level.width - view.w);
         }
-        if (center.y < view.y + yMArgin) {
-            view.y = Math.max(center.y - yMArgin, 0);
-        } else if (center.y > view.y + view.h - yMArgin) {
-            view.y = Math.min(center.y + yMArgin - view.h,
+        if (center.y < view.y + yMargin) {
+            view.y = Math.max(center.y - yMargin, 0);
+        } else if (center.y > view.y + view.h - yMargin) {
+            view.y = Math.min(center.y + yMargin - view.h,
                 this.level.height - view.h);
         }
 
@@ -230,9 +228,7 @@ export default class Game extends Lightning.Component {
                 }
 
                 playerDied() {
-                    this.lives -= 1;
-                    this.tag("Lives").set(this.lives);
-                    this.player.die();
+                    this._setState("Died");
                 }
 
                 carrotGrab() {
@@ -277,6 +273,42 @@ export default class Game extends Lightning.Component {
             },
             class Paused extends this {
 
+            },
+            class Died extends this{
+                _captureKey(){
+
+                }
+                $enter(){
+                    this.patch({
+                        Background:{
+                            smooth:{alpha:0}
+                        },
+                        Level:{
+                            smooth:{alpha:0}
+                        }
+                    });
+
+                    this.player.setSmooth("scale",1.5, {duration:1});
+                    this.player.setSmooth("y",540, {duration:1});
+
+                    setTimeout(()=>{
+                        this.lives -= 1;
+                        this.tag("Lives").set(this.lives);
+                        this.player.die();
+                        this._setState("Playing")
+                        this.player.scale = 1;
+                    },2000)
+                }
+                $exit(){
+                    this.patch({
+                        Background:{
+                            smooth:{alpha:1}
+                        },
+                        Level:{
+                            smooth:{alpha:1}
+                        }
+                    });
+                }
             },
             class Win extends this {
                 $enter() {

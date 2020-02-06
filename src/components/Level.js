@@ -14,6 +14,7 @@ export default class Level extends Lightning.Component {
 
     set plan(v) {
         this._plan = v;
+        this._layout = v.layout;
     }
 
     set lives(v) {
@@ -39,8 +40,8 @@ export default class Level extends Lightning.Component {
     }
 
     _setup() {
-        this.width = this._plan[0].length;
-        this.height = this._plan.length;
+        this.width = this._layout[0].length;
+        this.height = this._layout.length;
         this.grid = [];
         this.actors = [];
         this.decorators = [];
@@ -49,7 +50,7 @@ export default class Level extends Lightning.Component {
 
     _init() {
         for (let y = 0; y < this.height; y++) {
-            let line = this._plan[y], gridLine = [];
+            let line = this._layout[y], gridLine = [];
             for (let x = 0; x < this.width; x++) {
                 let ch = line[x], fieldType = null;
                 let Actor = this.actorCharacters[ch];
