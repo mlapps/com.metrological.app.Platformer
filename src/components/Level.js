@@ -35,6 +35,7 @@ export default class Level extends Lightning.Component {
         this.height = this._plan.length;
         this.grid = [];
         this.actors = [];
+        this.carrots = 0;
     }
 
     _init() {
@@ -47,6 +48,11 @@ export default class Level extends Lightning.Component {
                     const a = this.stage.c({
                         type: Actor, pos: new Vector(x, y), ch
                     });
+
+                    if(Actor === Carrot){
+                        this.carrots+=1;
+                    }
+
                     this.actors.push(a);
                 } else if (ch == "x") {
                     fieldType = "wall";
@@ -97,6 +103,8 @@ export default class Level extends Lightning.Component {
         if (type === "lava") {
             this.signal("playerDied");
         } else if (type === "carrot") {
+            this.carrots -= 1;
+            this.signal("carrotGrab");
             actor.onTouch(player);
             this.actors = this.actors.filter((other) => {
                 return other !== actor;
