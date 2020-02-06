@@ -8,6 +8,7 @@ export default class Level extends Lightning.Component {
         return {
             Image: {},
             Assets: {},
+            Decorators: {},
             Actors: {}
         };
     }
@@ -30,11 +31,18 @@ export default class Level extends Lightning.Component {
         };
     }
 
+    get decoratorsCharacters() {
+        return {
+            "p": Plant
+        };
+    }
+
     _setup() {
         this.width = this._plan[0].length;
         this.height = this._plan.length;
         this.grid = [];
         this.actors = [];
+        this.decorators = [];
         this.carrots = 0;
     }
 
@@ -44,25 +52,34 @@ export default class Level extends Lightning.Component {
             for (let x = 0; x < this.width; x++) {
                 let ch = line[x], fieldType = null;
                 let Actor = this.actorCharacters[ch];
+                let Decorator = this.decoratorsCharacters[ch];
                 if (Actor) {
                     const a = this.stage.c({
                         type: Actor, pos: new Vector(x, y), ch
                     });
-
-                    if(Actor === Carrot){
-                        this.carrots+=1;
+                    if (Actor === Carrot) {
+                        this.carrots += 1;
                     }
-
                     this.actors.push(a);
+                } else if (Decorator) {
+                    const d = this.stage.c({
+                        type: Decorator, pos: new Vector(x, y), ch
+                    });
+
+                    this.decorators.push(d);
+                    // we don't want to do collision detection
+                    // against decorators so we continue the loop
+                    // and don't populate the grid line
+                    continue;
                 } else if (ch == "x") {
                     fieldType = "wall";
                 } else if (ch == "!") {
                     fieldType = "lava";
-                } else if (ch == "p") {
-                    fieldType = "plant";
                 }
+
                 gridLine.push(fieldType);
             }
+
             this.grid.push(gridLine);
         }
     }

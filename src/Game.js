@@ -86,6 +86,7 @@ export default class Game extends Lightning.Component {
         this.renderLevel(level, true);
         this.renderActors(level);
         this.updateStatistics(level);
+        this.renderDecorators(level);
 
         // reset keys
         this.keys = {
@@ -152,6 +153,19 @@ export default class Game extends Lightning.Component {
 
         // populate actores
         this.level.fill("Actors", children);
+    }
+
+    renderDecorators(level){
+        const children = level.decorators.map((decorator) => {
+            decorator.x = decorator.pos.x * this.levelScale;
+            decorator.y = decorator.pos.y * this.levelScale;
+            decorator.w = this.levelScale;
+            decorator.h = this.levelScale;
+            return decorator;
+        }).filter(Boolean);
+
+        // populate actores
+        this.level.fill("Decorators", children);
     }
 
     updateStatistics(level) {

@@ -13,11 +13,11 @@ export default class Plant extends Lightning.Component {
     }
 
     set pos(v) {
-        this.pos = v;
+        this._pos = v;
     }
 
     get pos() {
-        return this.pos;
+        return this._pos;
     }
 
     static get size() {

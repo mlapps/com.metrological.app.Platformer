@@ -1,5 +1,5 @@
 export default [
-    ["                                                                  ",
+       ["                                                                  ",
         "                                                                  ",
         "                                     cc                           ",
         "             c                c    xxxxx                          ",
@@ -8,11 +8,12 @@ export default [
         "  x                    x                                          ",
         "  x                  x                                            ",
         "  x          xxxxxxx                                              ",
-        "  x  @       x  x                                                 ",
+        "  x  @       x  x                      p  p p pppp    p p p p     ",
         "  xxxxxxxxxxxx  xxxxxxxxxxxxxxx   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
         "                                                                  ",
         "                                                                  ",
         "                                                                  "],
+
        ["                                         ",
         "                                         ",
         "                       c                 ",
