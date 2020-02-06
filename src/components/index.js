@@ -3,6 +3,7 @@ export {default as Carrot} from './Carrot';
 export {default as Level} from './Level';
 export {default as Lava} from './Lava';
 export {default as Wall} from './Wall';
+export {default as Floor} from './Floor';
 export {default as Plant} from './Plant';
 export {default as Assets} from './Assets';
 export {default as Lives} from './Lives';

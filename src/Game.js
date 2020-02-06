@@ -1,4 +1,4 @@
-import {Level, Wall, Assets, Player, Lives, CarrotsLeft} from "./components";
+import {Level, Assets, Player, Lives, CarrotsLeft} from "./components";
 import {Lightning, Settings} from "wpe-lightning-sdk";
 import levels from "./lib/gameLevels";
 
@@ -115,14 +115,17 @@ export default class Game extends Lightning.Component {
                 if (tile === null) {
                     continue;
                 } else {
+                    const construct = Assets.get(tile);
+
                     const screenX = x * this.levelScale;
                     const screenY = y * this.levelScale;
-                    const w = Wall.size.x * this.levelScale;
-                    const h = Wall.size.y * this.levelScale;
+                    console.log(tile, construct)
+                    const w = construct.size.x * this.levelScale;
+                    const h = construct.size.y * this.levelScale;
 
                     // create and hold reference
                     const child = this.stage.c({
-                        type: Assets.get(tile), x: screenX, y: screenY, w, h
+                        type: construct, x: screenX, y: screenY, w, h
                     });
 
                     children.push(child);

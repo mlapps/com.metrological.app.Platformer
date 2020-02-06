@@ -1,9 +1,9 @@
 import {Lightning, Utils} from "wpe-lightning-sdk";
 import Vector from "../lib/Vector";
 
-export default class Wall extends Lightning.Component {
+export default class Floor extends Lightning.Component {
     static _template() {
-        return {rect:true};
+        return {};
     }
 
     _init() {
@@ -12,16 +12,16 @@ export default class Wall extends Lightning.Component {
     }
 
     set pos(v) {
-        this._pos = v;
+        this.pos = v;
     }
 
     get pos() {
-        return this._pos;
+        return this.pos;
     }
 
     static get size() {
-        return Wall.prototype.size;
+        return Floor.prototype.size;
     }
 }
 
-Wall.prototype.size = new Vector(1, 1);
+Floor.prototype.size = new Vector(1, 1);

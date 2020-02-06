@@ -67,16 +67,13 @@ export default class Level extends Lightning.Component {
                     });
 
                     this.decorators.push(d);
-                    // we don't want to do collision detection
-                    // against decorators so we continue the loop
-                    // and don't populate the grid line
-                    continue;
                 } else if (ch == "x") {
+                    fieldType = "floor";
+                } else if (ch == "i") {
                     fieldType = "wall";
                 } else if (ch == "!") {
                     fieldType = "lava";
                 }
-
                 gridLine.push(fieldType);
             }
 
