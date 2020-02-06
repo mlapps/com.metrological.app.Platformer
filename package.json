@@ -1,0 +1,7 @@
+{
+  "name": "com.lightning.training",
+  "description": "Training",
+  "dependencies": {
+    "wpe-lightning-sdk": "WebPlatformForEmbedded/Lightning-SDK"
+  }
+}
