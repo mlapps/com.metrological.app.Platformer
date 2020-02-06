@@ -52,7 +52,7 @@ export default class Player extends Lightning.Component {
                     },
                     Eye: {
                         EyeLeft: {
-                            y: 15, rtt: true, w: 24, h: 24,
+                            y: 15, w: 24, rtt: true, h: 24,
                             EyeOuter: {
                                 src: Utils.asset("bunny_sprite.png"),
                                 texture: {x: 89, y: 71, w: 24, h: 24},
@@ -160,57 +160,10 @@ export default class Player extends Lightning.Component {
 
     _init() {
         this._pos = this._resetPos = this._pos.plus(new Vector(0, -0.5));
+
         this.speed = new Vector(0, 0);
 
-        this._idleAnimation = this.animation({
-            duration: 1, repeat: -1, actions: [
-                {t: 'Head', p: 'y', v: {0: {v: 30}, .5: {v: 34}, 1: {v: 30}}},
-                {t: 'Body', p: 'y', v: {0: {v: 0}, .5: {v: 2}, 1: {v: 0}}},
-                {t: 'EarLeft', p: 'rotation', v: {0: {v: 0}, .5: {v: Math.PI * -.1}, 1: {v: 0}}},
-                {t: 'EarRight', p: 'rotation', v: {0: {v: 0}, .5: {v: Math.PI * .1}, 1: {v: 0}}}
-            ]
-        });
-
-        this._walkAnimation = this.animation({
-            duration: .4, repeat: -1, actions: [
-                {t: 'Head', p: 'y', v: {0: {v: 30}, .5: {v: 34}, 1: {v: 30}}},
-                {t: 'Head', p: 'rotation', v: {0: {v: Math.PI * .1}, .5: {v: Math.PI * .15}, 1: {v: Math.PI * .1}}},
-                {t: 'Body', p: 'y', v: {0: {v: 0}, .5: {v: 5}, 1: {v: 0}}},
-                {t: 'Body', p: 'rotation', v: {0: {v: 0}, .5: {v: Math.PI * .05}, 1: {v: 0}}},
-                {t: 'EarLeft', p: 'rotation', v: {0: {v: Math.PI * .1}, .5: {v: Math.PI * .2}, 1: {v: Math.PI * .1}}},
-                {t: 'EarRight', p: 'rotation', v: {0: {v: Math.PI * .3}, .5: {v: Math.PI * .4}, 1: {v: Math.PI * .3}}},
-                {t: 'Mouth', p: 'x', v: {0: {v: 5}, .5: {v: 3}, 1: {v: 5}}},
-                {t: 'Gap', p: 'w', v: {0: {v: 10}, .5: {v: 20}, 1: {v: 10}}},
-                {t: 'Gap', p: 'h', v: {0: {v: 10}, .5: {v: 20}, 1: {v: 10}}}
-            ]
-        });
-
-        this._blinkLeftAnimation = this.tag("EyeLeft").animation({
-            duration: .4, delay: 1, repeat: -1, actions: [
-                {t: 'TopClipper', p: 'h', v: {0: {v: 0}, .5: {v: 12}, 1: {v: 0}}},
-                {t: 'BottomClipper', p: 'h', v: {0: {v: 0}, .5: {v: 12}, 1: {v: 0}}},
-                {t: 'Bottom', p: 'y', v: {0: {v: 12}, .5: {v: 0}, 1: {v: 12}}}
-            ]
-        });
-
-        this._blinkRightAnimation = this.tag("EyeRight").animation({
-            duration: .6, delay: 1.2, repeat: -1, actions: [
-                {t: 'TopClipper', p: 'h', v: {0: {v: 0}, .5: {v: 12}, 1: {v: 0}}},
-                {t: 'BottomClipper', p: 'h', v: {0: {v: 0}, .5: {v: 12}, 1: {v: 0}}},
-                {t: 'Bottom', p: 'y', v: {0: {v: 12}, .5: {v: 0}, 1: {v: 12}}}
-            ]
-        });
-
-        this._dieAnimation = this.animation({
-            duration: 3, repeat: -1, actions: [
-                {t: 'Bunny', p: 'rotation', v: {0: {v: 0}, .2: {v: Math.PI * .5}}},
-                {t: 'EarLeft', p: 'rotation', v: {0: {v: 0}, .2: {v: Math.PI * -.4}}},
-                {t: 'EarRight', p: 'rotation', v: {0: {v: 0}, .2: {v: Math.PI * .1}}},
-                {t: 'Pupil', p: 'alpha', v: {0: {v: 1}, .2: {v: 0}}},
-                {t: 'LegLeft', p: 'rotation', v: {0: {v: 0}, .2: {v: Math.PI * .4}}},
-                {t: 'LegRight', p: 'rotation', v: {0: {v: 0}, .2: {v: Math.PI * -.4}}}
-            ]
-        });
+        this.createAnimations();
 
         this._isWalking = false;
     }
@@ -308,5 +261,78 @@ export default class Player extends Lightning.Component {
 
     win() {
 
+    }
+
+    static _states(){
+        return [
+            class Jump extends this{
+
+            },
+            class RunLeft extends this{
+
+            },
+            class RunRight extends this{
+
+            },
+            class Idle extends this{
+
+            },
+            class Die extends this{
+
+            }
+        ]
+    }
+
+    createAnimations(){
+        this._idleAnimation = this.animation({
+            duration: 1, repeat: -1, actions: [
+                {t: 'Head', p: 'y', v: {0: {v: 30}, .5: {v: 34}, 1: {v: 30}}},
+                {t: 'Body', p: 'y', v: {0: {v: 0}, .5: {v: 2}, 1: {v: 0}}},
+                {t: 'EarLeft', p: 'rotation', v: {0: {v: 0}, .5: {v: Math.PI * -.1}, 1: {v: 0}}},
+                {t: 'EarRight', p: 'rotation', v: {0: {v: 0}, .5: {v: Math.PI * .1}, 1: {v: 0}}}
+            ]
+        });
+
+        this._walkAnimation = this.animation({
+            duration: .4, repeat: -1, actions: [
+                {t: 'Head', p: 'y', v: {0: {v: 30}, .5: {v: 34}, 1: {v: 30}}},
+                {t: 'Head', p: 'rotation', v: {0: {v: Math.PI * .1}, .5: {v: Math.PI * .15}, 1: {v: Math.PI * .1}}},
+                {t: 'Body', p: 'y', v: {0: {v: 0}, .5: {v: 5}, 1: {v: 0}}},
+                {t: 'Body', p: 'rotation', v: {0: {v: 0}, .5: {v: Math.PI * .05}, 1: {v: 0}}},
+                {t: 'EarLeft', p: 'rotation', v: {0: {v: Math.PI * .1}, .5: {v: Math.PI * .2}, 1: {v: Math.PI * .1}}},
+                {t: 'EarRight', p: 'rotation', v: {0: {v: Math.PI * .3}, .5: {v: Math.PI * .4}, 1: {v: Math.PI * .3}}},
+                {t: 'Mouth', p: 'x', v: {0: {v: 5}, .5: {v: 3}, 1: {v: 5}}},
+                {t: 'Gap', p: 'w', v: {0: {v: 10}, .5: {v: 20}, 1: {v: 10}}},
+                {t: 'Gap', p: 'h', v: {0: {v: 10}, .5: {v: 20}, 1: {v: 10}}}
+            ]
+        });
+
+        this._blinkLeftAnimation = this.tag("EyeLeft").animation({
+            duration: .4, delay: 1, repeat: -1, actions: [
+                {t: 'TopClipper', p: 'h', v: {0: {v: 0}, .5: {v: 12}, 1: {v: 0}}},
+                {t: 'BottomClipper', p: 'h', v: {0: {v: 0}, .5: {v: 12}, 1: {v: 0}}},
+                {t: 'Bottom', p: 'y', v: {0: {v: 12}, .5: {v: 0}, 1: {v: 12}}}
+            ]
+        });
+
+        this._blinkRightAnimation = this.tag("EyeRight").animation({
+            duration: .6, delay: 1.2, repeat: -1, actions: [
+                {t: 'TopClipper', p: 'h', v: {0: {v: 0}, .5: {v: 12}, 1: {v: 0}}},
+                {t: 'BottomClipper', p: 'h', v: {0: {v: 0}, .5: {v: 12}, 1: {v: 0}}},
+                {t: 'Bottom', p: 'y', v: {0: {v: 12}, .5: {v: 0}, 1: {v: 12}}}
+            ]
+        });
+
+
+        this._dieAnimation = this.animation({
+            duration: 3, repeat: -1, actions: [
+                {t: 'Bunny', p: 'rotation', v: {0: {v: 0}, .2: {v: Math.PI * .5}}},
+                {t: 'EarLeft', p: 'rotation', v: {0: {v: 0}, .2: {v: Math.PI * -.4}}},
+                {t: 'EarRight', p: 'rotation', v: {0: {v: 0}, .2: {v: Math.PI * .1}}},
+                {t: 'Pupil', p: 'alpha', v: {0: {v: 1}, .2: {v: 0}}},
+                {t: 'LegLeft', p: 'rotation', v: {0: {v: 0}, .2: {v: Math.PI * .4}}},
+                {t: 'LegRight', p: 'rotation', v: {0: {v: 0}, .2: {v: Math.PI * -.4}}}
+            ]
+        });
     }
 }
