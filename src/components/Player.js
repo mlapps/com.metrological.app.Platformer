@@ -203,7 +203,7 @@ export default class Player extends Lightning.Component {
 
     }
 
-    moveY(step, level, keys) {
+    moveY(step, level, keys, distance) {
         let gravity = 30;
         let jumpSpeed = 17;
         this.speed.y += step * gravity;
@@ -220,14 +220,12 @@ export default class Player extends Lightning.Component {
         } else {
             this.pos = newPos;
         }
-
-        // @todo: remove magic number
-        this.y = (this.pos.y - 0.95) * 75;
+        this.y = (this.pos.y - distance - 0.95) * 75;
     }
 
     act(step, level, keys, viewport) {
         this.moveX(step, level, keys, viewport.x);
-        this.moveY(step, level, keys);
+        this.moveY(step, level, keys, viewport.y);
 
         let otherActor = level.actorAt(this);
         if (otherActor) {
@@ -241,14 +239,12 @@ export default class Player extends Lightning.Component {
 
         if (keys.left || keys.right || keys.up) {
             if (!this._isWalking) {
-                console.log("start");
                 this._isWalking = true;
                 this._walkAnimation.start();
 
             }
         } else {
             if (this._isWalking) {
-                console.log("stop");
                 this._walkAnimation.stop();
                 this._isWalking = false;
             }

@@ -179,24 +179,26 @@ export default class Game extends Lightning.Component {
 
     updateViewport() {
         let view = this.viewport;
-        let margin = view.w / 3;
+        let xMargin = view.w / 3;
+        let yMArgin = view.h / 3;
         let player = this.player;
         let center = player.pos.plus(player.size.times(0.5));
 
-        if (center.x < view.x + margin) {
-            view.x = Math.max(center.x - margin, 0);
-        } else if (center.x > view.x + view.w - margin) {
-            view.x = Math.min(center.x + margin - view.w,
+        if (center.x < view.x + xMargin) {
+            view.x = Math.max(center.x - xMargin, 0);
+        } else if (center.x > view.x + view.w - xMargin) {
+            view.x = Math.min(center.x + xMargin - view.w,
                 this.level.width - view.w);
         }
-        if (center.y < view.y + margin) {
-            view.y = Math.max(center.y - margin, 0);
-        } else if (center.y > view.y + view.h - margin) {
-            view.y = Math.min(center.y + margin - view.h,
+        if (center.y < view.y + yMArgin) {
+            view.y = Math.max(center.y - yMArgin, 0);
+        } else if (center.y > view.y + view.h - yMArgin) {
+            view.y = Math.min(center.y + yMArgin - view.h,
                 this.level.height - view.h);
         }
 
         this.level.x = -this.viewport.x * this.levelScale;
+        this.level.y = -this.viewport.y * this.levelScale;
     }
 
     loop() {
