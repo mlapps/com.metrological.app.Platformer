@@ -4,3 +4,5 @@ export {default as Level} from './Level';
 export {default as Lava} from './Lava';
 export {default as Wall} from './Wall';
 export {default as Assets} from './Assets';
+export {default as Lives} from './Lives';
+export {default as CarrotsLeft} from './CarrotsLeft';
