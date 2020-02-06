@@ -1,4 +1,4 @@
-import {Wall, Lava, Plant, Floor} from "./";
+import {Wall, Lava, Floor} from "./";
 
 const types = new Map([
     ["wall", Wall],

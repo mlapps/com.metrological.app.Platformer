@@ -4,6 +4,7 @@ export {default as Level} from './Level';
 export {default as Lava} from './Lava';
 export {default as Wall} from './Wall';
 export {default as Floor} from './Floor';
+export {default as Slicer} from './Slicer';
 export {default as Jumper} from './Jumper';
 export {default as Plant} from './Plant';
 export {default as Assets} from './Assets';
