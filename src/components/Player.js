@@ -22,7 +22,7 @@ export default class Player extends Lightning.Component {
                 Body: {
                     src: Utils.asset("bunny_sprite.png"),
                     texture: {w: 75, h: 67, x: 5, y: 5},
-                    color: this.playerColor,
+                    color: this.playerColor
                 },
                 Head: {
                     src: Utils.asset("bunny_sprite.png"),
@@ -151,7 +151,7 @@ export default class Player extends Lightning.Component {
     }
 
     static get playerColor() {
-        return 0xffEB7362;
+        return 0xffFFC42A;
     }
 
     _construct() {
@@ -255,8 +255,13 @@ export default class Player extends Lightning.Component {
         }
      }
 
-    die() {
+    alive() {
         this.pos = this._resetPos;
+        this._setState("Idle");
+    }
+
+    died() {
+        this._setState("Died");
     }
 
     win() {
@@ -289,8 +294,13 @@ export default class Player extends Lightning.Component {
                     this._idleAnimation.stop();
                 }
             },
-            class Die extends this{
-
+            class Died extends this{
+                $enter() {
+                    this._dieAnimation.start();
+                }
+                $exit() {
+                    this._dieAnimation.stop();
+                }
             }
         ]
     }
@@ -352,7 +362,7 @@ export default class Player extends Lightning.Component {
         });
 
         this._dieAnimation = this.animation({
-            duration: 3, repeat: -1, actions: [
+            duration: 3, stopMethod: 'immediate', actions: [
                 {t: 'Bunny', p: 'rotation', v: {0: {v: 0}, .2: {v: Math.PI * .5}}},
                 {t: 'EarLeft', p: 'rotation', v: {0: {v: 0}, .2: {v: Math.PI * -.4}}},
                 {t: 'EarRight', p: 'rotation', v: {0: {v: 0}, .2: {v: Math.PI * .1}}},

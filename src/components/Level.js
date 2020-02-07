@@ -1,4 +1,4 @@
-import {Lightning} from "wpe-lightning-sdk";
+import {Lightning, Utils} from "wpe-lightning-sdk";
 import {Player, Carrot, Lava, Plant, Jumper, Slicer} from './';
 import Vector from "../lib/Vector";
 

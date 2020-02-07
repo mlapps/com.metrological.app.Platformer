@@ -1,5 +1,5 @@
 import {Level, Assets, Player, Lives, CarrotsLeft} from "./components";
-import {Lightning, Settings} from "wpe-lightning-sdk";
+import {Lightning, Settings, Utils} from "wpe-lightning-sdk";
 import levels from "./lib/gameLevels";
 
 
@@ -17,7 +17,7 @@ export default class Game extends Lightning.Component {
                     type: Lives
                 },
                 CarrotsLeft: {
-                   x: 70, y: 90,
+                   x: 70, y: 80,
                     type: CarrotsLeft
                 }
             }
@@ -175,8 +175,7 @@ export default class Game extends Lightning.Component {
 
     updateStatistics(level) {
         this.tag("Lives").set(this.lives);
-        this.tag("CarrotsLeft").set(level.carrots);
-        console.log(level.carrots)
+        this.tag("CarrotsLeft").set({left: level.carrots, total: level.total});
     }
 
     updateViewport() {
@@ -229,11 +228,12 @@ export default class Game extends Lightning.Component {
                 }
 
                 playerDied() {
+                    this.player.died();
                     this._setState("Died");
                 }
 
                 carrotGrab() {
-                    this.tag("CarrotsLeft").set(this.level.carrots);
+                    this.tag("CarrotsLeft").set({left: this.level.carrots, total: this.level.total});
                 }
 
                 playerFinished() {
@@ -289,13 +289,20 @@ export default class Game extends Lightning.Component {
                         }
                     });
 
+                    this.keys = {
+                        left: false,
+                        right: false,
+                        up: false,
+                        down: false
+                    };
+
                     this.player.setSmooth("scale",1.5, {duration:1});
                     this.player.setSmooth("y",540, {duration:1});
 
                     setTimeout(()=>{
                         this.lives -= 1;
                         this.tag("Lives").set(this.lives);
-                        this.player.die();
+                        this.player.alive();
                         this._setState("Playing")
                         this.player.scale = 1;
                     },2000)
