@@ -5,6 +5,7 @@ export {default as Lava} from './Lava';
 export {default as Wall} from './Wall';
 export {default as Floor} from './Floor';
 export {default as Slicer} from './Slicer';
+export {default as Mole} from './Mole';
 export {default as Jumper} from './Jumper';
 export {default as FloorLeft} from './FloorLeft';
 export {default as FloorRight} from './FloorRight';
