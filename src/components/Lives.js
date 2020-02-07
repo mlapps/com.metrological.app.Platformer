@@ -3,9 +3,7 @@ import {Lightning, Utils} from "wpe-lightning-sdk";
 export default class Lives extends Lightning.Component {
     static _template(){
         return {
-            Hearts: {
-
-            }
+            Hearts: {}
         }
     }
 
@@ -16,7 +14,7 @@ export default class Lives extends Lightning.Component {
         for (let i = 0; i < this._lives; i++) {
             this.tag("Hearts").childList.a({
                 src: Utils.asset('assets/ui/heart.png'),
-                x: i * 50
+                x: 43 * i
             });
         }
     }

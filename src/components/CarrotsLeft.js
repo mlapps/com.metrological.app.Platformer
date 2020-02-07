@@ -5,17 +5,26 @@ export default class CarrotsLeft extends Lightning.Component {
         return {
             flex: {},
             Carrot: {
+                flexItem: {marginTop: 10, marginBottom: 10, marginLeft: 0, marginRight: 15},
                 src: Utils.asset('assets/ui/carrot.png')
             },
-            Left:{x: 20, y: 3,
-                text:{text:'', fontFace: "Bold", fontSize: 26}
+            CarrotsCounter: {
+                flex: {},
+                Grabbed:{
+                    text:{text:'', fontFace: "Bold", fontSize: 42}
+                },
+                Total: {
+                    flexItem: {marginLeft: 10, marginTop: 14},
+                    text:{text:'', fontFace: "Bold", fontSize: 24}
+                }
             }
         }
     }
 
     set(v) {
-        this.carrotsLeft = v;
-        this.tag("Left").text.text = `${this.carrotsLeft}`;
+        this.carrots = v;
+        this.tag("Grabbed").text.text = `${this.carrots.total - this.carrots.left}`;
+        this.tag("Total").text.text = `/ ${this.carrots.total}`;
     }
 
 }
