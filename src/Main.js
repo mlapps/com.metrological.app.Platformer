@@ -6,7 +6,7 @@ export default class Main extends Lightning.Component {
     static _template(){
         return {
             Menu:{
-                x: 1540, y: 690,
+                x: 1510, y: 680,
                 type: Menu, items:[
                     {label:'Start',action:'start'},
                     {label:'Continue',action:'continue'},

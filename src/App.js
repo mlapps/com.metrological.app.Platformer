@@ -60,7 +60,7 @@ export default class App extends Lightning.Component {
 
                     setTimeout(() => {
                         this.tag("Player").setSmooth("alpha", 1);
-                        this.tag("Player").play("http://video.metrological.com/menu-loop.mp4", true);
+                        this.tag("Player").play("http://video.metrological.com/loop.mp4", true);
                     }, 500);
                 }
 
