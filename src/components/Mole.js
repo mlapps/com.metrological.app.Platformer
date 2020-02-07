@@ -40,7 +40,7 @@ export default class Mole extends Lightning.Component {
 
     _init() {
         this._range = 0;
-        this._direction = 2;
+        this._speed = 5;
 
         this._moleAnimation = this.animation({
             duration: .2, repeat: -1, stopMethod: 'immediate', actions: [
@@ -72,18 +72,16 @@ export default class Mole extends Lightning.Component {
     };
 
     act(dt) {
-        if (this._range === -160) {
-            this._direction = 4;
+        if (this._range === -175) {
+            this._speed = 5;
         }
 
-        if (this._range === 76) {
-            this._direction = -4;
+        if (this._range === 75) {
+            this._speed = -5;
         }
 
-        console.log(this._range)
-
-        this._range += this._direction;
-        this._pos.y += (this._direction / 75);
+        this._range += this._speed;
+        this._pos.y += (this._speed / 75);
 
         this.tag("Mole").y = this._range;
     }

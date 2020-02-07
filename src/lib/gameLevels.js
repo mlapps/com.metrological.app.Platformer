@@ -4,7 +4,7 @@ export default [
       description: `After a long nice sleep you've waken up to a nice sunrise, but what's that noice? 
       It's your stomach.."Time to eat!", you run to your house, you open the door.. no carrots. Someone
       must have taken them. Lets chase them..`,
-      movie:'movie.mp4',
+      movie:'intro.mp4',
       layout: [
           "                                                                  ",
           "                                                                  ",
@@ -40,7 +40,7 @@ export default [
         name: 'Chapter 2. The jump is real',
         description: `.. he's quick.. too quick for you. The fox has taken the higher ground, there is only one way up,
         make good use of the jumpers to catch that fox.`,
-        movie:'movie.mp4',
+        movie:'intro.mp4',
         layout: [
             "                                         ",
             "                                         ",
