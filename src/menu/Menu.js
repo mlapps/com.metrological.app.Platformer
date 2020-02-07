@@ -1,4 +1,4 @@
-import { Lightning } from "wpe-lightning-sdk";
+import { Lightning, Utils } from "wpe-lightning-sdk";
 import Item from "./Item.js";
 
 export default class Menu extends Lightning.Component{
@@ -6,10 +6,11 @@ export default class Menu extends Lightning.Component{
     static _template(){
         return {
             Items:{
-                x:40
+                x: 80
             },
-            FocusIndicator:{y:5,
-                text:{text:'>', fontFace:'pixel'}
+            FocusIndicator:{
+                y: 10,
+                src: Utils.asset("assets/carrot.png"),
             }
         }
     }
@@ -35,7 +36,7 @@ export default class Menu extends Lightning.Component{
         // create children by handing over an array of
         // object to the objectList
         this.tag("Items").children = v.map((el, idx)=>{
-            return {type: Item, action: el.action, label: el.label, y: idx*90}
+            return {type: Item, action: el.action, label: el.label, y: idx*80}
         })
     }
 
@@ -58,9 +59,13 @@ export default class Menu extends Lightning.Component{
 
     _setIndex(idx){
         // since it's a one time transition we use smooth
-        this.tag("FocusIndicator").setSmooth("y", idx*90 + 5)
+        this.tag("FocusIndicator").setSmooth("y", idx*80 + 10);
 
         // store new index
         this._index = idx;
+    }
+
+    _getFocused(){
+        return this.activeItem;
     }
 }

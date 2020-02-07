@@ -8,7 +8,7 @@ export default class App extends Lightning.Component {
 
     static getFonts() {
         return [
-            {family: 'pixel', url: Utils.asset('fonts/pixel.ttf'), descriptor: {}}
+            {family: 'Bold', url: Utils.asset('fonts/Magra-Bold.ttf'), descriptor: {}}
         ];
     }
 
@@ -57,12 +57,20 @@ export default class App extends Lightning.Component {
                     this.tag("Main").patch({
                         smooth: {alpha: 1, y: 0}
                     });
+
+                    setTimeout(() => {
+                        this.tag("Player").setSmooth("alpha", 1);
+                        this.tag("Player").play("http://video.metrological.com/loop.mp4", true);
+                    }, 500);
                 }
 
                 $exit() {
                     this.tag("Main").patch({
                         smooth: {alpha: 0, y: 100}
                     });
+
+                    this.tag("Player").setSmooth("alpha", 0);
+                    this.tag("Player").stop();
                 }
 
                 menuSelect({item}) {
@@ -84,7 +92,9 @@ export default class App extends Lightning.Component {
             class Video extends this {
                 $enter() {
                     this.tag("Player").setSmooth("alpha", 1);
-                    this.tag("Player").play("http://video.metrological.com/epicbunnytale.mp4");
+                    setTimeout(() => {
+                        this.tag("Player").play("http://video.metrological.com/epicbunnytale.mp4", false);
+                    }, 500);
                 }
 
                 $exit() {

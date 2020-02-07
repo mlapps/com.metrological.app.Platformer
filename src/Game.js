@@ -12,12 +12,13 @@ export default class Game extends Lightning.Component {
             Level: {},
             Player: {},
             Statistics: {
-                x: 50, y: 50,
                 Lives: {
+                    x: 70, y: 40,
                     type: Lives
                 },
                 CarrotsLeft: {
-                    type: CarrotsLeft, y: 50
+                   x: 70, y: 90,
+                    type: CarrotsLeft
                 }
             }
         };
