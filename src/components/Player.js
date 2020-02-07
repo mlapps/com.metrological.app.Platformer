@@ -244,19 +244,23 @@ export default class Player extends Lightning.Component {
             this.size.y -= step;
         }
 
-        if (this.speed.y) {
-            if (this.speed.y < -0.05) {
-                this._setState("Jumping");
+        if (this.state !== "Died") {
+            if (this.speed.y) {
+                if (this.speed.y < -0.05) {
+                    this._setState("Jumping");
+                }
+            } else if (this.speed.x) {
+                this._setState("Running");
+            } else {
+                this._setState("Idle");
             }
-        } else if (this.speed.x) {
-            this._setState("Running");
-        } else {
-            this._setState("Idle");
         }
      }
 
     alive() {
         this.pos = this._resetPos;
+        this.speed.x = 0;
+        this.speed.y = 0;
         this._setState("Idle");
     }
 
