@@ -17,8 +17,13 @@ export default class Player extends Lightning.Component{
         })
     }
 
-    play(src){
+    play(src, loop){
         this.tag("MediaPlayer").open(src);
+        this.tag("MediaPlayer").videoEl.loop = loop;
+    }
+
+    stop() {
+        this.tag("MediaPlayer").close();
     }
 
     $mediaplayerProgress({currentTime, duration}){
@@ -32,7 +37,7 @@ export default class Player extends Lightning.Component{
     }
 
     $mediaplayerPlay(){
-        this.tag("MediaPlayer").seek(15, true)
+        // this.tag("MediaPlayer").seek(15, true)
     }
 
     $mediaplayerPause(){

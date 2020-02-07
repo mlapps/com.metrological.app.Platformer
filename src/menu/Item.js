@@ -4,7 +4,8 @@ export default class Item extends Lightning.Component{
 
     static _template(){
         return {
-            text:{text:'', fontFace:'pixel', fontSize:50}
+            color: 0xffA8A6A2,
+            text:{text:'', fontFace:'Bold', fontSize:50}
         }
     }
 
@@ -18,5 +19,17 @@ export default class Item extends Lightning.Component{
 
     get action(){
         return this._action;
+    }
+
+    _focus() {
+        this.patch({
+            smooth: {color: 0xffffffff}
+        });
+    }
+
+    _unfocus() {
+        this.patch({
+            smooth: {color: 0xffA8A6A2}
+        });
     }
 }

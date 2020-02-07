@@ -44,6 +44,7 @@ export default class Level extends Lightning.Component {
         this.actors = [];
         this.decorators = [];
         this.carrots = 0;
+        this.total = 0;
     }
 
     _init() {
@@ -80,6 +81,7 @@ export default class Level extends Lightning.Component {
                 gridLine.push(fieldType);
             }
 
+            this.total = this.carrots;
             this.grid.push(gridLine);
         }
     }
