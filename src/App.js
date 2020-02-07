@@ -14,9 +14,6 @@ export default class App extends Lightning.Component {
 
     static _template() {
         return {
-            Logo: {
-                x: 100, y: 100, text: {text: 'TicTacToe', fontFace: 'pixel'}, alpha: 0
-            },
             rect: true, color: 0xff000000,
             Splash: {
                 type: Splash, signals: {loaded: true}, alpha: 0
@@ -34,7 +31,7 @@ export default class App extends Lightning.Component {
     }
 
     _setup() {
-        this._setState("Main");
+        this._setState("Splash");
     }
 
     static _states() {
@@ -58,10 +55,8 @@ export default class App extends Lightning.Component {
                         smooth: {alpha: 1, y: 0}
                     });
 
-                    setTimeout(() => {
-                        this.tag("Player").setSmooth("alpha", 1);
-                        this.tag("Player").play("http://video.metrological.com/loop.mp4", true);
-                    }, 500);
+                    this.tag("Player").setSmooth("alpha", 1);
+                    this.tag("Player").play("http://video.metrological.com/loop.mp4", true);
                 }
 
                 $exit() {
