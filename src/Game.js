@@ -76,7 +76,7 @@ export default class Game extends Lightning.Component {
         this._setState("Setup");
         // create and hold level reference
         const level = this.stage.c({
-            type: Level, plan: levels[~~(Math.random() * levels.length)], lives: 5, signals: {
+            type: Level, plan: levels[0/*~~(Math.random() * levels.length)*/], lives: 5, signals: {
                 playerDied: true, playerFinished: true, carrotGrab: true
             }
         });

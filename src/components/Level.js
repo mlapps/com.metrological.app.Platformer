@@ -1,4 +1,4 @@
-import {Lightning, Utils} from "wpe-lightning-sdk";
+import {Lightning} from "wpe-lightning-sdk";
 import {Player, Carrot, Lava, Plant, Jumper, Slicer, Mole} from './';
 import Vector from "../lib/Vector";
 
@@ -46,6 +46,10 @@ export default class Level extends Lightning.Component {
         this.decorators = [];
         this.carrots = 0;
         this.total = 0;
+
+        this._enemyType = [
+            "lava","moll","slicer"
+        ];
     }
 
     _init() {
@@ -123,28 +127,34 @@ export default class Level extends Lightning.Component {
     }
 
     playerTouched(type, actor, player) {
-        if (type === "mole") {
+        if(type.indexOf(this._enemyType) !== -1){
             this.signal("playerDied");
-        } else if (type === "lava") {
-            this.signal("playerDied");
-        } else if (type === "carrot") {
+            return
+        }
+
+        if (type === "carrot") {
             this.carrots -= 1;
             this.signal("carrotGrab");
+
+            // call touch method on actor, ad pass player reference
+            // could be handle more nicely in the future
             actor.onTouch(player);
+
+            // remove touched actor
             this.actors = this.actors.filter((other) => {
                 return other !== actor;
             });
+
+            // test if we still have carrots left
+            // else we signal that this level is finished
             if (!this.actors.some((actor) => {
                 return actor.atype === "carrot";
             })) {
                 this.signal("playerFinished");
             }
+
         } else if(type === "jumper"){
             actor.onTouch(player);
-        }else if(type === "slicer"){
-            this.signal("playerDied");
-        }else if(type === "lava"){
-            this.signal("playerDied");
         }
     }
 
@@ -155,6 +165,7 @@ export default class Level extends Lightning.Component {
     step(dt, viewport) {
         const actors = this.tag("Actors").children;
         let n = actors.length;
+
         while (n--) {
             actors[n].act(dt, viewport);
         }
