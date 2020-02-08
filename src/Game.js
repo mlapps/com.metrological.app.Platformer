@@ -228,7 +228,6 @@ export default class Game extends Lightning.Component {
                 }
 
                 playerDied() {
-                    this.player.died();
                     this._setState("Died");
                 }
 
@@ -280,6 +279,8 @@ export default class Game extends Lightning.Component {
 
                 }
                 $enter(){
+                    this.player.died();
+
                     this.patch({
                         Background:{
                             smooth:{alpha:0}
@@ -303,7 +304,7 @@ export default class Game extends Lightning.Component {
                         this.lives -= 1;
                         this.tag("Lives").set(this.lives);
                         this.player.alive();
-                        this._setState("Playing")
+                        this._setState("Playing");
                         this.player.scale = 1;
                     },2000)
                 }

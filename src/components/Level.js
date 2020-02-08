@@ -1,5 +1,5 @@
 import {Lightning, Utils} from "wpe-lightning-sdk";
-import {Player, Carrot, Lava, Plant, Jumper, Slicer} from './';
+import {Player, Carrot, Lava, Plant, Jumper, Slicer, Mole} from './';
 import Vector from "../lib/Vector";
 
 export default class Level extends Lightning.Component {
@@ -27,7 +27,8 @@ export default class Level extends Lightning.Component {
             "c": Carrot,
             "^": Jumper,
             'o': Slicer,
-            "!": Lava
+            "!": Lava,
+            "m": Mole
         };
     }
 
@@ -95,6 +96,7 @@ export default class Level extends Lightning.Component {
         if (xStart < 0 || xEnd > this.width || yStart < 0) {
             return "wall";
         }
+
         for (let y = yStart; y < yEnd; y++) {
             for (let x = xStart; x < xEnd; x++) {
                 let fieldType = this.grid[y][x];
@@ -119,7 +121,9 @@ export default class Level extends Lightning.Component {
     }
 
     playerTouched(type, actor, player) {
-        if (type === "lava") {
+        if (type === "mole") {
+            this.signal("playerDied");
+        } else if (type === "lava") {
             this.signal("playerDied");
         } else if (type === "carrot") {
             this.carrots -= 1;

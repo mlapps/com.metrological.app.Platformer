@@ -3,7 +3,9 @@ import Vector from "../lib/Vector";
 
 export default class Floor extends Lightning.Component {
     static _template() {
-        return {};
+        return {
+            zIndex: 2
+        };
     }
 
     _init() {

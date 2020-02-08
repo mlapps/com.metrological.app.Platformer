@@ -59,7 +59,7 @@ export default class App extends Lightning.Component {
      * @private
      */
     _setup() {
-        this._setState("Main");
+        this._setState("Splash");
     }
 
     /**
@@ -95,10 +95,8 @@ export default class App extends Lightning.Component {
                         smooth: {alpha: 1, y: 0}
                     });
 
-                    setTimeout(() => {
-                        this.tag("Player").setSmooth("alpha", 1);
-                        this.tag("Player").play("http://video.metrological.com/loop.mp4", true);
-                    }, 500);
+                    this.tag("Player").setSmooth("alpha", 1);
+                    this.tag("Player").play("http://video.metrological.com/loop.mp4", true);
                 }
 
                 $exit() {
@@ -134,7 +132,7 @@ export default class App extends Lightning.Component {
                 $enter() {
                     this.tag("Player").setSmooth("alpha", 1);
                     setTimeout(() => {
-                        this.tag("Player").play("http://video.metrological.com/epicbunnytale.mp4", false);
+                        this.tag("Player").play("http://video.metrological.com/intro.mp4", false);
                     }, 500);
                 }
 
