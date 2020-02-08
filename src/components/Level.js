@@ -95,6 +95,8 @@ export default class Level extends Lightning.Component {
 
         if (xStart < 0 || xEnd > this.width || yStart < 0) {
             return "wall";
+        }else if(yEnd > this.height){
+            return "lava";
         }
 
         for (let y = yStart; y < yEnd; y++) {
