@@ -1,11 +1,31 @@
+/**
+ * We import Lightning and Utils from our SDK:
+ * https://github.com/WebPlatformForEmbedded/Lightning-SDK
+ *
+ */
 import {Lightning, Utils} from "wpe-lightning-sdk";
+
+/**
+ * Import all the Components that we need in our App
+ */
 import Splash from "./Splash.js";
 import Main from "./Main.js";
 import Game from "./Game.js";
 import Player from "./Player.js";
 
+/**
+ * Every Component will extends a Lightning Component
+ * or a class that extends a Lightning Component:
+ * https://webplatformforembedded.github.io/Lightning/docs/components/overview
+ */
 export default class App extends Lightning.Component {
 
+    /**
+     * Provide all the needed fonts for your Application. During setup all the fonts will be loaded
+     * and after load your app will show.
+     *
+     * @returns {{descriptor: {}, family: string, url: *}[]}
+     */
     static getFonts() {
         return [
             {family: 'Bold', url: Utils.asset('fonts/Magra-Bold.ttf'), descriptor: {}}
@@ -14,10 +34,10 @@ export default class App extends Lightning.Component {
 
     static _template() {
         return {
+            rect: true, color: 0xff000000, w: 1920, h: 1080,
             Logo: {
                 x: 100, y: 100, text: {text: 'TicTacToe', fontFace: 'pixel'}, alpha: 0
             },
-            rect: true, color: 0xff000000,
             Splash: {
                 type: Splash, signals: {loaded: true}, alpha: 0
             },
@@ -33,13 +53,29 @@ export default class App extends Lightning.Component {
         };
     }
 
+    /**
+     * Setup lifecycle event:
+     * https://webplatformforembedded.github.io/Lightning/docs/components/overview#component-events
+     * @private
+     */
     _setup() {
         this._setState("Main");
     }
 
+    /**
+     * The definition of our statemachine:
+     * https://webplatformforembedded.github.io/Lightning/docs/components/statemachine/statemachine
+     *
+     * @returns {*[]}
+     * @private
+     */
     static _states() {
         return [
             class Splash extends this {
+                /**
+                 * $enter() will be called when you enter a state,
+                 * $exit() when you leave a state, you can do any additional clean up here
+                 */
                 $enter() {
                     this.tag("Splash").setSmooth("alpha", 1);
                 }
@@ -54,6 +90,7 @@ export default class App extends Lightning.Component {
             },
             class Main extends this {
                 $enter() {
+
                     this.tag("Main").patch({
                         smooth: {alpha: 1, y: 0}
                     });
@@ -83,8 +120,12 @@ export default class App extends Lightning.Component {
                     this._setState("Video");
                 }
 
-                // change focus path to main
-                // component which handles the remotecontrol
+                /**
+                 * Tell Lightning which component is the active component
+                 * and should handle the remote control events.
+                 * @returns {*|never}
+                 * @private
+                 */
                 _getFocused() {
                     return this.tag("Main");
                 }
