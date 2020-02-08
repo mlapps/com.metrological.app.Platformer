@@ -39,15 +39,14 @@ export default class Mole extends Lightning.Component {
     }
 
     _init() {
-        this._range = 0;
-        this._speed = 5;
-
         this._moleAnimation = this.animation({
             duration: .2, repeat: -1, stopMethod: 'immediate', actions: [
                 {t: 'ArmLeft', p: 'rotation', v: {0: {v: Math.PI * -.2}, .5: {v: Math.PI * -.7}, 1: {v: Math.PI * -.2}}},
                 {t: 'ArmRight', p: 'rotation', v: {0: {v: Math.PI * .2}, .5: {v: Math.PI * .7}, 1: {v: Math.PI * .2}}}
             ]
         });
+        this._jumpPos = Math.random() * Math.PI * 2
+        this._offset = 0;
     }
 
     _active() {
@@ -72,18 +71,12 @@ export default class Mole extends Lightning.Component {
     };
 
     act(dt) {
-        if (this._range === -175) {
-            this._speed = 5;
-        }
+        const jumpSpeed = 3.5;
+        const jumpDistance = 75;
+        this._jumpPos += dt * jumpSpeed;
+        const molePos = Math.sin(this._jumpPos) * jumpDistance;
 
-        if (this._range === 75) {
-            this._speed = -5;
-        }
-
-        this._range += this._speed;
-        this._pos.y += (this._speed / 75);
-
-        this.tag("Mole").y = this._range;
+        this.tag("Mole").y = molePos;
     }
 
     onTouch(player) {
