@@ -8,35 +8,35 @@ export default class Splash extends Lightning.Component {
                 rect: true, w: 1920, h: 1080, colorTop: 0xff38769f, colorBottom: 0xff363358
             },
             Logo: {
-                mount: .5, x: 960, y: 540, alpha: 0,
-                transitions: {alpha: {duration: 1}, scale: {duration: 1}},
-                src: Utils.asset("logo.png")
+                // @todo: add and position logo.png from static folder ( Utils.asset() )
             },
             Carrot: {
-                mount: 1, x: 1840, y: 1000,
-                src: Utils.asset("assets/carrot.png")
+                // @todo: add and position carrot.png
             }
         }
     }
 
+    /**
+     * This will fire when the component is initialized
+     * https://webplatformforembedded.github.io/Lightning/docs/components/overview#component-events
+     */
     _init(){
-        this._pulse = this.animation({
-            duration: 1, repeat: 3, actions:[
-                {t: 'Carrot', p:'rotation', v:{0: 0, 1: Math.PI * 2}}
-            ]
-        });
-        this._pulse.start();
-
-        this._pulse.on("finish",()=>{
-            this.signal("loaded");
-        });
+        /**
+         * https://webplatformforembedded.github.io/Lightning/docs/animations/overview
+         *
+         * @todo:
+         *  - create a carrot animation that changes the rotation property
+         *  - start the animation
+         *  - listen to animation finish and signal: ready.
+         */
     }
 
     _active() {
-        this.patch({
-            Logo: {
-                smooth: {alpha: 1, scale: 1.2}
-            }
-        });
+        /**
+         * https://webplatformforembedded.github.io/Lightning/docs/transitions/overview
+         *
+         * @todo:
+         *  - do a transition on the logo's alpha and scale property
+         */
     }
 }
