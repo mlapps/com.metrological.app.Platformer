@@ -206,9 +206,9 @@ export default class App extends Lightning.Component {
                 }
             },
             class Video extends this {
-                $enter() {
+                $enter(args, {video}={video:"http://video.metrological.com/intro.mp4"}) {
+                    this.tag("Player").play(video, false);
                     this.tag("Player").setSmooth("alpha", 1);
-                    this.tag("Player").play("http://video.metrological.com/intro.mp4", false);
                 }
 
                 $exit() {
@@ -243,7 +243,9 @@ export default class App extends Lightning.Component {
             class PrepareNewRound extends this {
                 $enter() {
                     this.tag("Game").createNewRound();
-                    this._setState("Video");
+                    this._setState("Video", [{
+                        video:"http://video.metrological.com/finish.mp4"
+                    }]);
                 }
             }
         ];
