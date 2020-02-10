@@ -1,11 +1,13 @@
 import { Lightning, Utils } from "wpe-lightning-sdk";
 
+import List from "./List.js";
+
 export default class LevelSelection extends Lightning.Component {
 
     static _template(){
         return {
             Background: {
-                rect: true, w: 1920, h: 1080, colorTop: 0xff000000, colorBottom: 0xff363358
+                rect: true, w: 1920, h: 1080, color: 0xff000000
             },
             Lists:{
                 x: 150, y: 150
@@ -20,10 +22,11 @@ export default class LevelSelection extends Lightning.Component {
         // create lists
         const children = categories.map((el, idx)=>{
             return {
-                type: List, label: el.name, items: el.levels, y: idx*400
+                type: List, label: el.name, items: el.levels, y: idx*350
             }
         });
 
+        // set current position
         this._index = 0;
 
         // add children
@@ -56,47 +59,5 @@ export default class LevelSelection extends Lightning.Component {
 
     get activeList(){
         return this.lists[this._index];
-    }
-}
-
-class List extends Lightning.Component{
-    static _template(){
-        return{
-            alpha:0.5,
-            Label:{
-                text:{text:'', fontFace: 'Magra'}
-            },
-            Levels:{
-                y: 75
-            }
-        }
-    }
-
-    _focus(){
-        this.setSmooth("alpha",1);
-    }
-
-    _unfocus(){
-        this.setSmooth("alpha",0.5);
-    }
-
-    set label(v){
-        this.tag("Label").text.text = v;
-    }
-
-    set items(v){
-        this.tag("Levels").children = v.map((el, idx)=>{
-            return {
-                type: Level, x: idx * 320
-            };
-        });
-    }
-}
-
-class Level extends Lightning.Component{
-    static _template(){
-        return {
-            rect: true, w: 300, h: 150
-        }
     }
 }

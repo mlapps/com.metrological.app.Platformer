@@ -11,7 +11,12 @@
         {
           "title": "1",
           "description": "test",
-          "thumbnail": "level1.jpeg"
+          "thumbnail": "level2.jpeg"
+        },
+        {
+          "title": "1",
+          "description": "test",
+          "thumbnail": "level2.jpeg"
         },
         {
           "title": "1",
@@ -21,7 +26,12 @@
         {
           "title": "1",
           "description": "test",
-          "thumbnail": "level1.jpeg"
+          "thumbnail": "level2.jpeg"
+        },
+        {
+          "title": "1",
+          "description": "test",
+          "thumbnail": "level3.jpeg"
         },
         {
           "title": "1",
@@ -31,22 +41,12 @@
         {
           "title": "1",
           "description": "test",
-          "thumbnail": "level1.jpeg"
+          "thumbnail": "level2.jpeg"
         },
         {
           "title": "1",
           "description": "test",
-          "thumbnail": "level1.jpeg"
-        },
-        {
-          "title": "1",
-          "description": "test",
-          "thumbnail": "level1.jpeg"
-        },
-        {
-          "title": "1",
-          "description": "test",
-          "thumbnail": "level1.jpeg"
+          "thumbnail": "level3.jpeg"
         },
         {
           "title": "1",
@@ -66,7 +66,12 @@
         {
           "title": "1",
           "description": "test",
-          "thumbnail": "level1.jpeg"
+          "thumbnail": "level2.jpeg"
+        },
+        {
+          "title": "1",
+          "description": "test",
+          "thumbnail": "level3.jpeg"
         },
         {
           "title": "1",
@@ -76,7 +81,12 @@
         {
           "title": "1",
           "description": "test",
-          "thumbnail": "level1.jpeg"
+          "thumbnail": "level2.jpeg"
+        },
+        {
+          "title": "1",
+          "description": "test",
+          "thumbnail": "level3.jpeg"
         },
         {
           "title": "1",
@@ -86,22 +96,12 @@
         {
           "title": "1",
           "description": "test",
-          "thumbnail": "level1.jpeg"
+          "thumbnail": "level2.jpeg"
         },
         {
           "title": "1",
           "description": "test",
-          "thumbnail": "level1.jpeg"
-        },
-        {
-          "title": "1",
-          "description": "test",
-          "thumbnail": "level1.jpeg"
-        },
-        {
-          "title": "1",
-          "description": "test",
-          "thumbnail": "level1.jpeg"
+          "thumbnail": "level3.jpeg"
         },
         {
           "title": "1",
