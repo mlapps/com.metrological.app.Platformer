@@ -53,7 +53,7 @@ export default class Player extends Lightning.Component{
      * @param duration
      */
     $mediaplayerPlay(){
-        this.tag("MediaPlayer").seek(15, true)
+        this.tag("MediaPlayer").seek(17, true)
     }
 
     $mediaplayerPause(){
