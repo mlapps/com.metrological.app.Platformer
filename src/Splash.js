@@ -13,7 +13,7 @@ export default class Splash extends Lightning.Component {
 
     _init(){
         this._pulse = this.animation({
-            duration: 1, repeat: 3, actions:[
+            duration: 0.1, repeat: 3, actions:[
                 {t: 'Carrot', p:'rotation', v:{0: 0, 1: Math.PI * 2}}
             ]
         });
