@@ -11,10 +11,6 @@ import {Lightning, Utils} from "wpe-lightning-sdk";
 
 import Splash from "./Splash.js";
 import Main from "./Main.js";
-import Game from "./Game.js";
-import Player from "./Player.js";
-import About from "./About";
-import LevelSelection from "./levelSelection/LevelSelection.js";
 
 /**
  * Every Component will extends a Lightning Component
@@ -32,7 +28,6 @@ export default class App extends Lightning.Component {
     static getFonts() {
         return [
             {family: 'Magra', url: Utils.asset('fonts/Magra-Bold.ttf'), descriptor: {}},
-            {family: 'Roboto', url: Utils.asset('fonts/Roboto-Regular.ttf'), descriptor: {}}
         ];
     }
 
@@ -46,22 +41,14 @@ export default class App extends Lightning.Component {
                 /**
                  * Define which signals you accept from the splash page
                  */
+                // @todo: implement signal in stateMachine
+                // so that we can go to state: Main
                 signals: {loaded: true}, alpha: 0
             },
-            Player: {
-                type: Player, alpha: 0, signals: {videoEnded: "ready"}
-            },
             Main: {
-                type: Main, alpha: 0, signals: {select: "menuSelect"}
-            },
-            About:{
-                type: About, alpha: 0
-            },
-            LevelSelection:{
-                type: LevelSelection, alpha: 0
-            },
-            Game: {
-                type: Game, alpha: 0, signals: {won: true}
+                type: Main, alpha: 0,
+                // @todo: implement signal in stateMachine
+                signals: {select: "menuSelect"}
             }
         };
     }
@@ -97,157 +84,21 @@ export default class App extends Lightning.Component {
                     this.tag("Splash").setSmooth("alpha", 0);
                 }
 
-                loaded() {
-                    this._setState("Main");
-                }
+                /**
+                 * @todo: implement loaded()
+                 */
+
             },
             class Main extends this {
                 $enter() {
                     this.tag("Main").patch({
                         smooth: {alpha: 1, y: 0}
                     });
-                    this.tag("Player").setSmooth("alpha", 1);
-                    this.tag("Player").play("http://video.metrological.com/loop.mp4", true);
                 }
-
-                $exit() {
-                    this.tag("Main").patch({
-                        smooth: {alpha: 0, y: 100}
-                    });
-
-                    this.tag("Player").setSmooth("alpha", 0);
-                    this.tag("Player").stop();
-                }
-
                 /**
-                 * get's called when someone selects a menu item
-                 * we first test if we have an attached method
-                 * with that action
-                 * @param item
-                 * @returns {*}
+                 * @todo:
+                 * - implement menuSelect()
                  */
-                menuSelect({item}) {
-                    if (this._hasMethod(item.action)) {
-                        return this[item.action]();
-                    }
-                }
-
-                /**
-                 * start action / called by menu
-                 */
-                start() {
-                    this._setState("Video");
-                }
-
-                /**
-                 * about action / called by menu
-                 * this is mainly to showcase substates
-                 */
-
-                about(){
-                    this._setState("Main.About");
-                }
-
-                levels(){
-                    this._setState("LevelSelection");
-                }
-
-                /**
-                 * Tell Lightning which component is the active component
-                 * and should handle the remote control events.
-                 * @returns {*|never}
-                 * @private
-                 */
-                _getFocused() {
-                    return this.tag("Main");
-                }
-
-                /**
-                 * Define substates
-                 * @returns {Array}
-                 * @private
-                 */
-                static _states(){
-                    return [
-                        class About extends this{
-                            $enter(){
-                                this.tag("About").setSmooth("alpha",1);
-                            }
-
-                            $exit(){
-                                this.tag("About").setSmooth("alpha",0);
-                            }
-
-                            _handleBack(){
-                                this._setState("Main");
-                            }
-
-                            _getFocused(){
-                                this.tag("About");
-                            }
-                        }
-                    ]
-                }
-            },
-            class LevelSelection extends this{
-                $enter(){
-                    this.tag("LevelSelection").setSmooth("alpha",1);
-                }
-
-                $exit(){
-                    this.tag("LevelSelection").setSmooth("alpha",0);
-                }
-
-                _getFocused(){
-                    return this.tag("LevelSelection");
-                }
-
-                _handleBack(){
-                    this._setState("Main");
-                }
-            },
-            class Video extends this {
-                $enter(args, {video}={video:"http://video.metrological.com/intro.mp4"}) {
-                    this.tag("Player").play(video, false);
-                    this.tag("Player").setSmooth("alpha", 1);
-                }
-
-                $exit() {
-                    this.tag("Player").setSmooth("alpha", 0);
-                }
-
-                _getFocused() {
-                    return this.tag("Player");
-                }
-
-                ready() {
-                    this._setState("Game");
-                }
-            },
-            class Game extends this {
-                $enter() {
-                    this.tag("Game").setSmooth("alpha", 1);
-                }
-
-                $exit() {
-                    this.tag("Game").setSmooth("alpha", 0);
-                }
-
-                _getFocused() {
-                    return this.tag("Game");
-                }
-
-                won() {
-                    this._setState("PrepareNewRound");
-                }
-            },
-            class PrepareNewRound extends this {
-                $enter() {
-                    this.tag("Game").createNewRound();
-                    this._setState("Video", [{
-                        video:"http://video.metrological.com/finish.mp4"
-                    }]);
-                }
             }
         ];
     }

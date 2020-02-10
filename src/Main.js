@@ -5,9 +5,6 @@ export default class Main extends Lightning.Component {
 
     static _template(){
         return {
-            Logo:{
-
-            },
             Menu:{
                 x: 1510, y: 680,
                 type: Menu, items:[
@@ -20,11 +17,9 @@ export default class Main extends Lightning.Component {
         }
     }
 
-    _getFocused(){
-        return this.tag("Menu");
-    }
-
-    _handleEnter(){
-        this.signal("select", {item: this.tag("Menu").activeItem});
-    }
+    /**
+     * @todo:
+     *  - implement _getFocused() and change focusPath to our Menu Item
+     *  - implement _handleEnter() and signal an action
+     */
 }

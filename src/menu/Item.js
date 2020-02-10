@@ -5,12 +5,16 @@ export default class Item extends Lightning.Component{
     static _template(){
         return {
             color: 0xffA8A6A2,
-            text:{text:'', fontFace:'Magra', fontSize:50}
+            text:{
+                text:''
+                // @todo: add correct fontSize and fontFace
+                // https://webplatformforembedded.github.io/Lightning/docs/textures/text
+            }
         }
     }
 
     set label(v){
-        this.text.text = v;
+        // @todo: update the text
     }
 
     set action(v){
@@ -22,14 +26,10 @@ export default class Item extends Lightning.Component{
     }
 
     _focus() {
-        this.patch({
-            smooth: {color: 0xffffffff}
-        });
+        // @todo: change the text color
     }
 
     _unfocus() {
-        this.patch({
-            smooth: {color: 0xffA8A6A2}
-        });
+        // @todo: change the text color
     }
 }
