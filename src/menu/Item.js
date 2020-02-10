@@ -5,7 +5,7 @@ export default class Item extends Lightning.Component{
     static _template(){
         return {
             color: 0xffA8A6A2,
-            text:{text:'', fontFace:'Bold', fontSize:50}
+            text:{text:'', fontFace:'Magra', fontSize:50}
         }
     }
 
