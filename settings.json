@@ -5,7 +5,7 @@
       "useImageWorker": true
     },
     "debug": false,
-    "showGrid": false
+    "showGrid": true
   },
   "platformSettings": {
     "path": "./static",

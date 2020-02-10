@@ -4,13 +4,12 @@ import Vector from "../lib/Vector";
 export default class Floor extends Lightning.Component {
     static _template() {
         return {
-            zIndex: 2
+            zIndex: 2, w: 75, h:75, rect: true, color:0xffffffff
         };
     }
 
     _init() {
-        const index = Math.floor((Math.random() * 4) + 1);
-        this.src = Utils.asset(`assets/level/floor-${index}.png`);
+
     }
 
     set pos(v) {

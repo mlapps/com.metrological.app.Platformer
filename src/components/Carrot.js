@@ -5,12 +5,7 @@ export default class Carrot extends Lightning.Component {
 
     static _template() {
         return {
-            src: Utils.asset("assets/level/carrot.png"),
-            w: 2, h: 2,
-            transitions: {
-                alpha: {duration: .6, timingFunction: 'cubic-bezier(0.20, 1.00, 0.80, 1.00)'},
-                scale: {duration: .6, timingFunction: 'cubic-bezier(0.20, 1.00, 0.80, 1.00)'}
-            }
+             w: 75, h: 75, rect: true, color: 0xffff9900
         };
     }
 
@@ -48,12 +43,6 @@ export default class Carrot extends Lightning.Component {
     }
 
     onTouch(player) {
-        // @todo: infect player
-        this.patch({
-            smooth: {
-                scale: [0,{duration:0.4,delay:0}],
-                alpha:[0, {duration:0.2, delay:0.3}]
-            }
-        });
+       // @todo: do something with the player or the carrot
     }
 }

@@ -10,18 +10,7 @@ export default class Game extends Lightning.Component {
                 rect: true, w: 1920, h: 1080, colorTop: 0xff38769f, colorBottom: 0xff363358
             },
             Level: {},
-            Player: {},
-            Statistics: {
-                Lives: {
-                    x: 70, y: 40,
-                    type: Lives
-                },
-                CarrotsLeft: {
-                   x: 70, y: 80,
-                    type: CarrotsLeft
-                },
-                zIndex:2
-            }
+            Player: {}
         };
     }
 
@@ -63,10 +52,6 @@ export default class Game extends Lightning.Component {
 
     _init() {
         this.createNewRound();
-
-        if (Settings.get("app", "showGrid")) {
-            this.renderDebugGrid();
-        }
     }
 
     _active() {
@@ -77,7 +62,7 @@ export default class Game extends Lightning.Component {
         this._setState("Setup");
         // create and hold level reference
         const level = this.stage.c({
-            type: Level, plan: levels[1/*~~(Math.random() * levels.length)*/], lives: 5, signals: {
+            type: Level, plan: levels[0/*~~(Math.random() * levels.length)*/], lives: 5, signals: {
                 playerDied: true, playerFinished: true, carrotGrab: true
             }
         });
@@ -90,8 +75,6 @@ export default class Game extends Lightning.Component {
 
         this.renderLevel(level, true);
         this.renderActors(level);
-        this.updateStatistics(level);
-        this.renderDecorators(level);
 
         // reset keys
         this.keys = {
@@ -161,24 +144,6 @@ export default class Game extends Lightning.Component {
         this.level.fill("Actors", children);
     }
 
-    renderDecorators(level){
-        const children = level.decorators.map((decorator) => {
-            decorator.x = decorator.pos.x * this.levelScale;
-            decorator.y = decorator.pos.y * this.levelScale;
-            decorator.w = this.levelScale;
-            decorator.h = this.levelScale;
-            return decorator;
-        }).filter(Boolean);
-
-        // populate actores
-        this.level.fill("Decorators", children);
-    }
-
-    updateStatistics(level) {
-        this.tag("Lives").set(this.lives);
-        this.tag("CarrotsLeft").set({left: level.carrots, total: level.total});
-    }
-
     updateViewport() {
         let view = this.viewport;
         let xMargin = view.w / 3;
@@ -203,17 +168,6 @@ export default class Game extends Lightning.Component {
         this.level.y = -this.viewport.y * this.levelScale;
     }
 
-    loop() {
-        // update level
-        this.level.step(this.stage.dt, this.viewport);
-
-        // update player
-        this.player.act(this.stage.dt, this.level, this.keys, this.viewport);
-
-        // update viewport
-        this.updateViewport();
-    }
-
     static _states() {
         return [
             class Setup extends this {
@@ -228,137 +182,32 @@ export default class Game extends Lightning.Component {
                     this.stage.off("frameStart", this.updateListener);
                 }
 
-                playerDied() {
-                    this._setState("Died");
-                }
+                /**
+                 * @todo:
+                 * Please inspect components/Player.js and inspect lines 43 / 47 / 73
+                 * it's checks the properties left / right / up and down of the keys object.
+                 *
+                 * - add _handleUp() / _handleDown() / _handleUpRelease() methods
+                 * - change object properties
+                 */
 
-                carrotGrab() {
-                    this.tag("CarrotsLeft").set({left: this.level.carrots, total: this.level.total});
-                }
-
-                playerFinished() {
-                    this._setState("Win");
-                }
-
-                _handleLeft() {
-                    this.keys.left = true;
-                }
-
-                _handleLeftRelease() {
-                    this.keys.left = false;
-                }
-
-                _handleRight() {
-                    this.keys.right = true;
-                }
-
-                _handleRightRelease() {
-                    this.keys.right = false;
-                }
-
-                _handleUp() {
-                    this.keys.up = true;
-                }
-
-                _handleUpRelease() {
-                    this.keys.up = false;
-                }
-
-                _handleDown() {
-                    this.keys.down = true;
-                }
-
-                _handleDownRelease() {
-                    this.keys.down = false;
-                }
-            },
-            class Paused extends this {
-
-            },
-            class Died extends this{
-                _captureKey(){
-
-                }
-                $enter(){
-                    this.player.died();
-
-                    this.patch({
-                        Background:{
-                            smooth:{alpha:0}
-                        },
-                        Level:{
-                            smooth:{alpha:0}
-                        }
-                    });
-
-                    this.keys = {
-                        left: false,
-                        right: false,
-                        up: false,
-                        down: false
-                    };
-
-                    this.player.setSmooth("scale",1.5, {duration:1});
-                    this.player.setSmooth("y",540, {duration:1});
-
-                    setTimeout(()=>{
-                        this.lives -= 1;
-                        this.tag("Lives").set(this.lives);
-                        this.player.alive();
-                        this._setState("Playing");
-                        this.player.scale = 1;
-                    },2000)
-                }
-                $exit(){
-                    this.patch({
-                        Background:{
-                            smooth:{alpha:1}
-                        },
-                        Level:{
-                            smooth:{alpha:1}
-                        }
-                    });
-                }
-            },
-            class Win extends this {
-                $enter() {
-                    this.signal("won");
-                }
-            },
-            class Lost extends this {
 
             }
         ];
     }
 
-    renderDebugGrid() {
-        const c = new Array(40).fill("").map((el, idx) => {
-            return {
-                type: Line, y: idx * 40
-            };
-        });
-        const d = new Array(60).fill("").map((el, idx) => {
-            return {
-                type: Line, x: idx * 40, h: 1080, w: 1
-            };
-        });
-        this.patch({
-            Grid: {
-                alpha: 0.5, children: [...c, ...d]
-            }
-        });
-        this.tag("Grid").animation({
-            duration: 10, repeat: -1, actions: [
-                {p: 'alpha', v: {0: 0.5, 0.3: 0, 1: 0.5}}
-            ]
-        }).start();
-    }
-}
+    loop() {
+        // update level
+        this.level.step(this.stage.dt, this.viewport);
 
-class Line extends Lightning.Component {
-    static _template() {
-        return {
-            rect: true, h: 1, w: 1920
-        };
+        /**
+         * @todo:
+         * - uncomment player.act() after previous todo is finished:
+         */
+
+        // this.player.act(this.stage.dt, this.level, this.keys, this.viewport);
+
+        // update viewport
+        this.updateViewport();
     }
 }

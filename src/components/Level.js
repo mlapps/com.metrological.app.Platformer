@@ -7,7 +7,6 @@ export default class Level extends Lightning.Component {
     static _template() {
         return {
             Assets: {},
-            Decorators: {},
             Actors: {}
         };
     }
@@ -24,17 +23,7 @@ export default class Level extends Lightning.Component {
     get actorCharacters() {
         return {
             "@": Player,
-            "c": Carrot,
-            "^": Jumper,
-            'o': Slicer,
-            "!": Lava,
-            "m": Mole
-        };
-    }
-
-    get decoratorsCharacters() {
-        return {
-            "p": Plant
+            "c": Carrot
         };
     }
 
@@ -48,7 +37,7 @@ export default class Level extends Lightning.Component {
         this.total = 0;
 
         this._enemyType = [
-            "lava","mole","slicer"
+            "lava"
         ];
     }
 
@@ -58,7 +47,6 @@ export default class Level extends Lightning.Component {
             for (let x = 0; x < this.width; x++) {
                 let ch = line[x], fieldType = null;
                 let Actor = this.actorCharacters[ch];
-                let Decorator = this.decoratorsCharacters[ch];
                 if (Actor) {
                     const a = this.stage.c({
                         type: Actor, pos: new Vector(x, y), ch
@@ -67,21 +55,8 @@ export default class Level extends Lightning.Component {
                         this.carrots += 1;
                     }
                     this.actors.push(a);
-                } else if (Decorator) {
-                    const d = this.stage.c({
-                        type: Decorator, pos: new Vector(x, y), ch
-                    });
-                    this.decorators.push(d);
                 } else if (ch == "x") {
                     fieldType = "floor";
-                } else if (ch == "(") {
-                    fieldType = "floor-left";
-                } else if (ch == ")") {
-                    fieldType = "floor-right";
-                } else if (ch == "i") {
-                    fieldType = "wall";
-                } else if (ch == "!") {
-                    fieldType = "lava";
                 }
                 gridLine.push(fieldType);
             }
@@ -154,8 +129,6 @@ export default class Level extends Lightning.Component {
                 this.signal("playerFinished");
             }
 
-        } else if(type === "jumper"){
-            actor.onTouch(player);
         }
     }
 
