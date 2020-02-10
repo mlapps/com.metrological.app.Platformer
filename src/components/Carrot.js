@@ -51,7 +51,8 @@ export default class Carrot extends Lightning.Component {
         // @todo: infect player
         this.patch({
             smooth: {
-                alpha: 0, scale: .2
+                scale: [0,{duration:0.4,delay:0}],
+                alpha:[0, {duration:0.2, delay:0.3}]
             }
         });
     }

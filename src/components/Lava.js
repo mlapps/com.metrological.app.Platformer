@@ -18,7 +18,6 @@ export default class Lava extends Lightning.Component {
 
     _construct() {
         this._size = new Vector(1, 1);
-        this.speed = new Vector(2, 0);
     }
 
     _init() {

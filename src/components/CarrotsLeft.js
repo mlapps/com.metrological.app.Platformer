@@ -11,11 +11,11 @@ export default class CarrotsLeft extends Lightning.Component {
             CarrotsCounter: {
                 flex: {},
                 Grabbed:{
-                    text:{text:'', fontFace: "Bold", fontSize: 42}
+                    text:{text:'', fontFace: "Magra", fontSize: 42}
                 },
                 Total: {
                     flexItem: {marginLeft: 10, marginTop: 14},
-                    text:{text:'', fontFace: "Bold", fontSize: 24}
+                    text:{text:'', fontFace: "Magra", fontSize: 24}
                 }
             }
         }

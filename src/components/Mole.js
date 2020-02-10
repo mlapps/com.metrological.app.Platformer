@@ -47,6 +47,7 @@ export default class Mole extends Lightning.Component {
         });
         this._jumpPos = Math.random() * Math.PI * 2
         this._offset = 0;
+        this._prevPos = 0;
     }
 
     _active() {
@@ -71,12 +72,18 @@ export default class Mole extends Lightning.Component {
     };
 
     act(dt) {
-        const jumpSpeed = 3.5;
-        const jumpDistance = 75;
+        const jumpSpeed = 2.5;
+        const jumpDistance = 200;
         this._jumpPos += dt * jumpSpeed;
+
         const molePos = Math.sin(this._jumpPos) * jumpDistance;
 
-        this.tag("Mole").y = molePos;
+        this.tag("Mole").patch({
+            y: molePos + 50, scaleY: molePos > this._prevPos?-1:1
+        })
+
+        this.visible = !!(molePos < 0);
+        this._prevPos = molePos;
     }
 
     onTouch(player) {

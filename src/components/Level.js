@@ -48,7 +48,7 @@ export default class Level extends Lightning.Component {
         this.total = 0;
 
         this._enemyType = [
-            "lava","moll","slicer"
+            "lava","mole","slicer"
         ];
     }
 
@@ -120,14 +120,15 @@ export default class Level extends Lightning.Component {
                 actor.pos.x + actor._size.x > other.pos.x &&
                 actor.pos.x < other.pos.x + other._size.x &&
                 actor.pos.y + actor._size.y > other.pos.y &&
-                actor.pos.y < other.pos.y + other._size.y) {
+                actor.pos.y < other.pos.y + other._size.y &&
+                other.visible ) {
                 return other;
             }
         }
     }
 
     playerTouched(type, actor, player) {
-        if(type.indexOf(this._enemyType) !== -1){
+        if(this._enemyType.indexOf(type) !== -1){
             this.signal("playerDied");
             return
         }

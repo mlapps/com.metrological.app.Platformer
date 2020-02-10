@@ -206,7 +206,7 @@ export default class Player extends Lightning.Component {
         }
         // @todo: remove magic number
         this._walkAnimation.settings.duration = (0.5 / (0.5 + 0.5 * Math.abs(this.speed.x)));
-        this.x = (this.pos.x - distance + 0.2) * 75;
+        this.x = (this.pos.x - distance - 0.1) * 75;
 
     }
 
@@ -231,6 +231,7 @@ export default class Player extends Lightning.Component {
     }
 
     act(step, level, keys, viewport) {
+
         this.moveX(step, level, keys, viewport.x);
         this.moveY(step, level, keys, viewport.y);
 
