@@ -31,7 +31,8 @@ export default class App extends Lightning.Component {
      */
     static getFonts() {
         return [
-            {family: 'Magra', url: Utils.asset('fonts/Magra-Bold.ttf'), descriptor: {}}
+            {family: 'Magra', url: Utils.asset('fonts/Magra-Bold.ttf'), descriptor: {}},
+            {family: 'Roboto', url: Utils.asset('fonts/Roboto-Regular.ttf'), descriptor: {}}
         ];
     }
 
@@ -54,7 +55,7 @@ export default class App extends Lightning.Component {
                 type: Main, alpha: 0, signals: {select: "menuSelect"}
             },
             About:{
-                type: About, x: -500,
+                type: About, alpha: 0
             },
             LevelSelection:{
                 type: LevelSelection, alpha: 0
@@ -170,11 +171,11 @@ export default class App extends Lightning.Component {
                     return [
                         class About extends this{
                             $enter(){
-                                this.tag("About").setSmooth("x",0);
+                                this.tag("About").setSmooth("alpha",1);
                             }
 
                             $exit(){
-                                this.tag("About").setSmooth("x",-500);
+                                this.tag("About").setSmooth("alpha",0);
                             }
 
                             _handleBack(){

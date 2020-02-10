@@ -1,7 +1,7 @@
 
 export default [
     {
-      name: 'Chapter 1. The carrots are gone',
+      name: 'Chapter 1.1 The carrots are gone',
       description: `After a long nice sleep you've waken up to a nice sunrise, but what's that noice? 
       It's your stomach.."Time to eat!", you run to your house, you open the door.. no carrots. Someone
       must have taken them. Lets chase them..`,
@@ -19,7 +19,7 @@ export default [
           "i  c                    c  i                   i   c  i           ",
           "i  c   m          m     ^  i  c   m            i                  ",
           "xxxxxxxxxxxxx)  (xxx)  (xxxxxxxxxxxx           i   ^      ^       ",
-          "             i  i   i  i                       (xxxxxxxxxxxx)  () ",
+          "             i  i   i  i                       (xxxxxxxxxxxx)   ()",
           "            (x!!x) (x!!x)                                     c   ",
           "                                          ^                       ",
           "                                       (xxxxxx)   c  c  c  c  c   ",
@@ -40,12 +40,42 @@ export default [
           "                                                                  ",
           "                                                                  ",
           "                                                                  "],
-     },
+    },
     {
-        name: 'Chapter 2. The jump is real',
+        name: 'Chapter 1.2 Carrot hunt',
+        description: ``,
+        movie:'finish.mp4',
+        layout: [
+            "i                              i             c                                      ",
+            "i @                            i             c                                      ",
+            "(xxxxxxxxx)     c    (xxxxxxxxx)             c                                  c   ",
+            "i               c              i             c                                      ",
+            "i    c       m     m           i             c            (xxxxxxx)    (xxxxxxxxxxx)",
+            "i    c     (xxxxxxxxx)    c    i             c            i                         ",
+            "i    c                    c    i    c                     i                         ",
+            "i    ^                         i    c        ^  (xxxxxxxxx)      cc   cc            ",
+            "(xxxxxxxxx)     c    (xxxxxxxxx)    c           i               c  c c  c           ",
+            "i               c              i    c           i              c    c    c          ",
+            "i    c       m     m           i    c           i               c       c           ",
+            "i    c     (xxxxxxxxx)    c    i    c           i                c     c            ",
+            "i    c                    c    i             c  i                  c  c             ",
+            "i    ^                         i    ^        c  i                   cc              ",
+            "(xxxxxxxxx)     c    (xxxxxxxxx)             c  i   c      m     ^      ^       m   ",
+            "i               c                            c  i       (xxxxxxxxxxxxxxxxxxxxxxxxxx)",
+            "i    c       m     m                         c  i                                   ",
+            "i    c     (xxxxxxxxx)    c                  c  i   c                               ",
+            "i    c                    c                     i           c   c   c   c   c   c   ",
+            "i    ^                                       ^  i                                   ",
+            "(xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)   c   (xxxxxxxxxxxxxxxxxxxxxxxxxx)",
+            "                                                                                    ",
+            "                                                    ^                               ",
+            "(xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)"],
+    },
+    {
+        name: 'Chapter 1.3 The jump is real',
         description: `.. he's quick.. too quick for you. The fox has taken the higher ground, there is only one way up,
         make good use of the jumpers to catch that fox.`,
-        movie:'intro.mp4',
+        movie:'finish.mp4',
         layout: [
             "                             i                                                                     ",
             "                             i    (xxxxxxxxxxxxxxxxx)                                              ",
@@ -73,9 +103,10 @@ export default [
             "                                                                                                   "],
     },
     {
-        name: 'Chapter 3. High-per',
+        name: 'Chapter 2.1 High-per',
         description: `.. he's quick.. too quick for you. The fox has taken the higher ground, there is only one way up,
         make good use of the jumpers to catch that fox.`,
+        movie:'finish.mp4',
         layout:[
             "                     i                                           i         i                                                           ",
             "                     i                                           i         i                                                           ",
@@ -126,9 +157,10 @@ export default [
             "                                                                                                                                       "],
     },
     {
-        name: 'Chapter 3. High-per',
+        name: 'Chapter 2.2. High-per',
         description: `.. he's quick.. too quick for you. The fox has taken the higher ground, there is only one way up,
         make good use of the jumpers to catch that fox.`,
+        movie:'finish.mp4',
         layout:[
             "                                                                                                                                               ",
             "                                                                                                                                               ",
