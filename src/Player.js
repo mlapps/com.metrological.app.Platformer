@@ -34,7 +34,7 @@ export default class Player extends Lightning.Component{
      * @param duration
      */
     $mediaplayerProgress({currentTime, duration}){
-        console.log(currentTime, duration)
+
     }
 
     /**

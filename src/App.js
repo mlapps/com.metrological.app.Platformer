@@ -40,9 +40,6 @@ export default class App extends Lightning.Component {
      */
     static _template() {
         return {
-            Wrapper:{
-                w: 1920, h:1080, src: Utils.asset("bunny-bg.jpg")
-            },
             Splash: {
                 type: Splash,
                 /**
@@ -109,7 +106,7 @@ export default class App extends Lightning.Component {
                         smooth: {alpha: 1, y: 0}
                     });
                     this.tag("Player").setSmooth("alpha", 1);
-                    this.tag("Player").play(Utils.asset("startloop.mp4"), true);
+                    this.tag("Player").play("http://video.metrological.com/loop.mp4", true);
                 }
 
                 $exit() {
@@ -138,9 +135,7 @@ export default class App extends Lightning.Component {
                  * start action / called by menu
                  */
                 start() {
-                    // this._setState("Video");
-                    // fix when connection is back
-                    this._setState("Game");
+                    this._setState("Video");
                 }
 
                 /**
