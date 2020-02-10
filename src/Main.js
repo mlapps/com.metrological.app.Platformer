@@ -5,11 +5,15 @@ export default class Main extends Lightning.Component {
 
     static _template(){
         return {
+            Logo:{
+
+            },
             Menu:{
-                x: 1510, y: 680,
+                x: 1510, y: 610,
                 type: Menu, items:[
                     {label:'Start',action:'start'},
                     {label:'Continue',action:'continue'},
+                    {label:'Level select',action:'levels'},
                     {label:'About',action:'about'},
                     {label:'Exit', action:'exit'}
                 ]
