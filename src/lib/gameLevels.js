@@ -97,7 +97,7 @@ export default [
             "                                        ",
             "        ^                     ^         ",
             "(xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx)",
-            "                                       ",],
+            "                                        ",],
     },
     {
         name: 'Chapter 1.4 The jump is real',
