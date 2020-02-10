@@ -1,26 +1,8 @@
-import {Lightning, Utils} from "wpe-lightning-sdk";
-import Vector from "../lib/Vector";
+import { Utils} from "wpe-lightning-sdk";
+import {Floor} from "./";
 
-export default class FloorLeft extends Lightning.Component {
-    static _template() {
-        return {};
-    }
-
+export default class FloorLeft extends Floor {
     _init() {
-        this.src = Utils.asset(`assets/level/floor-left-${1}.png`);
-    }
-
-    set pos(v) {
-        this.pos = v;
-    }
-
-    get pos() {
-        return this.pos;
-    }
-
-    static get size() {
-        return FloorLeft.prototype.size;
+        this.src = Utils.asset(`assets/level/floor-left-1.png`);
     }
 }
-
-FloorLeft.prototype.size = new Vector(1, 1);
