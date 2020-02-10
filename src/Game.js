@@ -114,8 +114,8 @@ export default class Game extends Lightning.Component {
         let yStart = 0;
         let yEnd = view.length;
 
-        for (let y = yStart; y < yEnd - 1; y++) {
-            for (let x = xStart; x < xEnd - 1; x++) {
+        for (let y = yStart; y < yEnd; y++) {
+            for (let x = xStart; x < xEnd; x++) {
                 const tile = this.level.grid[y][x];
                 if (tile === null) {
                     continue;
