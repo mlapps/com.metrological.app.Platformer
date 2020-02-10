@@ -19,7 +19,8 @@ export default class Game extends Lightning.Component {
                 CarrotsLeft: {
                    x: 70, y: 80,
                     type: CarrotsLeft
-                }
+                },
+                zIndex:2
             }
         };
     }

@@ -14,7 +14,7 @@ import Main from "./Main.js";
 import Game from "./Game.js";
 import Player from "./Player.js";
 import About from "./About";
-import LevelSelection from "./LevelSelection.js";
+import LevelSelection from "./levelSelection/LevelSelection.js";
 
 /**
  * Every Component will extends a Lightning Component
@@ -47,6 +47,9 @@ export default class App extends Lightning.Component {
                  */
                 signals: {loaded: true}, alpha: 0
             },
+            Player: {
+                type: Player, alpha: 0, signals: {videoEnded: "ready"}
+            },
             Main: {
                 type: Main, alpha: 0, signals: {select: "menuSelect"}
             },
@@ -58,9 +61,6 @@ export default class App extends Lightning.Component {
             },
             Game: {
                 type: Game, alpha: 0, signals: {won: true}
-            },
-            Player: {
-                type: Player, alpha: 0, signals: {videoEnded: "ready"}
             }
         };
     }
@@ -208,7 +208,7 @@ export default class App extends Lightning.Component {
             class Video extends this {
                 $enter() {
                     this.tag("Player").setSmooth("alpha", 1);
-                    this.tag("Player").play(Utils.asset("startloop.mp4"), false);
+                    this.tag("Player").play("http://video.metrological.com/intro.mp4", false);
                 }
 
                 $exit() {

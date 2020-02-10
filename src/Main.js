@@ -9,10 +9,9 @@ export default class Main extends Lightning.Component {
 
             },
             Menu:{
-                x: 1510, y: 610,
+                x: 1510, y: 680,
                 type: Menu, items:[
                     {label:'Start',action:'start'},
-                    {label:'Continue',action:'continue'},
                     {label:'Level select',action:'levels'},
                     {label:'About',action:'about'},
                     {label:'Exit', action:'exit'}
