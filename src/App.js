@@ -8,10 +8,13 @@ import {Lightning, Utils} from "wpe-lightning-sdk";
 /**
  * Import all the Components that we need in our App
  */
+
 import Splash from "./Splash.js";
 import Main from "./Main.js";
 import Game from "./Game.js";
 import Player from "./Player.js";
+import About from "./About";
+import LevelSelection from "./LevelSelection.js";
 
 /**
  * Every Component will extends a Lightning Component
@@ -28,21 +31,33 @@ export default class App extends Lightning.Component {
      */
     static getFonts() {
         return [
-            {family: 'Bold', url: Utils.asset('fonts/Magra-Bold.ttf'), descriptor: {}}
+            {family: 'Magra', url: Utils.asset('fonts/Magra-Bold.ttf'), descriptor: {}}
         ];
     }
 
+    /**
+     * Define the root tree of your App
+     */
     static _template() {
         return {
-
-            Logo: {
-                x: 100, y: 100, text: {text: 'TicTacToe', fontFace: 'pixel'}, alpha: 0
+            Wrapper:{
+                w: 1920, h:1080, src: Utils.asset("bunny-bg.jpg")
             },
             Splash: {
-                type: Splash, signals: {loaded: true}, alpha: 0
+                type: Splash,
+                /**
+                 * Define which signals you accept from the splash page
+                 */
+                signals: {loaded: true}, alpha: 0
             },
             Main: {
                 type: Main, alpha: 0, signals: {select: "menuSelect"}
+            },
+            About:{
+                type: About, x: -500,
+            },
+            LevelSelection:{
+                type: LevelSelection, alpha: 0
             },
             Game: {
                 type: Game, alpha: 0, signals: {won: true}
@@ -90,13 +105,11 @@ export default class App extends Lightning.Component {
             },
             class Main extends this {
                 $enter() {
-
                     this.tag("Main").patch({
                         smooth: {alpha: 1, y: 0}
                     });
-
                     this.tag("Player").setSmooth("alpha", 1);
-                    this.tag("Player").play("http://video.metrological.com/loop.mp4", true);
+                    this.tag("Player").play(Utils.asset("startloop.mp4"), true);
                 }
 
                 $exit() {
@@ -108,14 +121,39 @@ export default class App extends Lightning.Component {
                     this.tag("Player").stop();
                 }
 
+                /**
+                 * get's called when someone selects a menu item
+                 * we first test if we have an attached method
+                 * with that action
+                 * @param item
+                 * @returns {*}
+                 */
                 menuSelect({item}) {
                     if (this._hasMethod(item.action)) {
                         return this[item.action]();
                     }
                 }
 
+                /**
+                 * start action / called by menu
+                 */
                 start() {
-                    this._setState("Video");
+                    // this._setState("Video");
+                    // fix when connection is back
+                    this._setState("Game");
+                }
+
+                /**
+                 * about action / called by menu
+                 * this is mainly to showcase substates
+                 */
+
+                about(){
+                    this._setState("Main.About");
+                }
+
+                levels(){
+                    this._setState("LevelSelection");
                 }
 
                 /**
@@ -127,13 +165,55 @@ export default class App extends Lightning.Component {
                 _getFocused() {
                     return this.tag("Main");
                 }
+
+                /**
+                 * Define substates
+                 * @returns {Array}
+                 * @private
+                 */
+                static _states(){
+                    return [
+                        class About extends this{
+                            $enter(){
+                                this.tag("About").setSmooth("x",0);
+                            }
+
+                            $exit(){
+                                this.tag("About").setSmooth("x",-500);
+                            }
+
+                            _handleBack(){
+                                this._setState("Main");
+                            }
+
+                            _getFocused(){
+                                this.tag("About");
+                            }
+                        }
+                    ]
+                }
+            },
+            class LevelSelection extends this{
+                $enter(){
+                    this.tag("LevelSelection").setSmooth("alpha",1);
+                }
+
+                $exit(){
+                    this.tag("LevelSelection").setSmooth("alpha",0);
+                }
+
+                _getFocused(){
+                    return this.tag("LevelSelection");
+                }
+
+                _handleBack(){
+                    this._setState("Main");
+                }
             },
             class Video extends this {
                 $enter() {
                     this.tag("Player").setSmooth("alpha", 1);
-                    setTimeout(() => {
-                        this.tag("Player").play("http://video.metrological.com/intro.mp4", false);
-                    }, 500);
+                    this.tag("Player").play(Utils.asset("startloop.mp4"), false);
                 }
 
                 $exit() {
