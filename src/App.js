@@ -13,8 +13,6 @@ import Splash from "./Splash.js";
 import Main from "./Main.js";
 import Game from "./Game.js";
 import MediaPlayer from "./MediaPlayer.js";
-import About from "./About";
-import LevelSelection from "./levelSelection/LevelSelection.js";
 
 /**
  * Every Component will extends a Lightning Component
@@ -53,12 +51,6 @@ export default class App extends Lightning.Component {
             },
             Main: {
                 type: Main, alpha: 0, signals: {select: "menuSelect"}
-            },
-            About:{
-                type: About, alpha: 0
-            },
-            LevelSelection:{
-                type: LevelSelection, alpha: 0
             },
             Game: {
                 type: Game, alpha: 0, signals: {won: true}
@@ -136,20 +128,7 @@ export default class App extends Lightning.Component {
                  * start action / called by menu
                  */
                 start() {
-                    this._setState("Video");
-                }
-
-                /**
-                 * about action / called by menu
-                 * this is mainly to showcase substates
-                 */
-
-                about(){
-                    this._setState("Main.About");
-                }
-
-                levels(){
-                    this._setState("LevelSelection");
+                    this._setState("Game");
                 }
 
                 /**
@@ -160,68 +139,6 @@ export default class App extends Lightning.Component {
                  */
                 _getFocused() {
                     return this.tag("Main");
-                }
-
-                /**
-                 * Define substates
-                 * @returns {Array}
-                 * @private
-                 */
-                static _states(){
-                    return [
-                        class About extends this{
-                            $enter(){
-                                this.tag("About").setSmooth("alpha",1);
-                            }
-
-                            $exit(){
-                                this.tag("About").setSmooth("alpha",0);
-                            }
-
-                            _handleBack(){
-                                this._setState("Main");
-                            }
-
-                            _getFocused(){
-                                this.tag("About");
-                            }
-                        }
-                    ]
-                }
-            },
-            class LevelSelection extends this{
-                $enter(){
-                    this.tag("LevelSelection").setSmooth("alpha",1);
-                }
-
-                $exit(){
-                    this.tag("LevelSelection").setSmooth("alpha",0);
-                }
-
-                _getFocused(){
-                    return this.tag("LevelSelection");
-                }
-
-                _handleBack(){
-                    this._setState("Main");
-                }
-            },
-            class Video extends this {
-                $enter(args, {video}={video:"http://video.metrological.com/intro.mp4"}) {
-                    this.tag("MediaPlayer").play(video, false);
-                    this.tag("MediaPlayer").setSmooth("alpha", 1);
-                }
-
-                $exit() {
-                    this.tag("MediaPlayer").setSmooth("alpha", 0);
-                }
-
-                _getFocused() {
-                    return this.tag("MediaPlayer");
-                }
-
-                ready() {
-                    this._setState("Game");
                 }
             },
             class Game extends this {
@@ -235,18 +152,6 @@ export default class App extends Lightning.Component {
 
                 _getFocused() {
                     return this.tag("Game");
-                }
-
-                won() {
-                    this._setState("PrepareNewRound");
-                }
-            },
-            class PrepareNewRound extends this {
-                $enter() {
-                    this.tag("Game").createNewRound();
-                    this._setState("Video", [{
-                        video:"http://video.metrological.com/finish.mp4"
-                    }]);
                 }
             }
         ];

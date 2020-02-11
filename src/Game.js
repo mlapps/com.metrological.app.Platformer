@@ -280,8 +280,6 @@ export default class Game extends Lightning.Component {
 
                 }
                 $enter(){
-                    this.player.died();
-
                     this.patch({
                         Background:{
                             smooth:{alpha:0}
