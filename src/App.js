@@ -145,10 +145,15 @@ export default class App extends Lightning.Component {
                  */
 
                 about(){
-                    this._setState("Main.About");
+                    /**
+                     * @todo: force app in Main.About substate
+                     */
+                    // this._setState("Main.About");
                 }
 
                 levels(){
+                    // @todo: inspect LevelSelection, and launch it from menu
+                    // it has lazy creation
                     this._setState("LevelSelection");
                 }
 
@@ -163,31 +168,13 @@ export default class App extends Lightning.Component {
                 }
 
                 /**
-                 * Define substates
-                 * @returns {Array}
-                 * @private
+                 *
+                 * @todo:
+                 * - Add another statemachine (that will be the substate of Main
+                 * - add $enter / $exit
+                 * - add _handleBack() and go back to Main state
+                 *
                  */
-                static _states(){
-                    return [
-                        class About extends this{
-                            $enter(){
-                                this.tag("About").setSmooth("alpha",1);
-                            }
-
-                            $exit(){
-                                this.tag("About").setSmooth("alpha",0);
-                            }
-
-                            _handleBack(){
-                                this._setState("Main");
-                            }
-
-                            _getFocused(){
-                                this.tag("About");
-                            }
-                        }
-                    ]
-                }
             },
             class LevelSelection extends this{
                 $enter(){
