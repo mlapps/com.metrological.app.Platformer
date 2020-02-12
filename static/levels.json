@@ -1,112 +1,90 @@
 {
   "categories": [
     {
-      "name": "Basic",
+      "name": "Chapter 1: What the carrot...",
       "levels": [
         {
-          "title": "1",
-          "description": "test",
-          "thumbnail": "level1.jpeg"
+          "title": "Chapter 1.1: The carrots are gone!",
+          "thumbnail": "chapter-1-1.png"
         },
         {
-          "title": "1",
-          "description": "test",
-          "thumbnail": "level2.jpeg"
+          "title": "Chapter 1.2: Hunting cawwots",
+          "thumbnail": "chapter-1-2.png"
         },
         {
-          "title": "1",
+          "title": "Chapter 1.3: Jump jump",
           "description": "test",
-          "thumbnail": "level2.jpeg"
+          "thumbnail": "chapter-1-3.png"
         },
         {
-          "title": "1",
+          "title": "Chapter 1.4: Getting close",
           "description": "test",
-          "thumbnail": "level1.jpeg"
+          "thumbnail": "chapter-1-4.png"
         },
         {
-          "title": "1",
+          "title": "Chapter 1.5: It never ends!",
           "description": "test",
-          "thumbnail": "level2.jpeg"
+          "thumbnail": "chapter-1-5.png"
         },
         {
-          "title": "1",
-          "description": "test",
-          "thumbnail": "level3.jpeg"
+          "title": "Chapter 1.1: The carrots are gone!",
+          "thumbnail": "chapter-1-1.png"
         },
         {
-          "title": "1",
-          "description": "test",
-          "thumbnail": "level1.jpeg"
+          "title": "Chapter 1.2: Hunting cawwots",
+          "thumbnail": "chapter-1-2.png"
         },
         {
-          "title": "1",
+          "title": "Chapter 1.3: Jump jump",
           "description": "test",
-          "thumbnail": "level2.jpeg"
+          "thumbnail": "chapter-1-3.png"
         },
         {
-          "title": "1",
+          "title": "Chapter 1.4: Getting close",
           "description": "test",
-          "thumbnail": "level3.jpeg"
+          "thumbnail": "chapter-1-4.png"
         },
         {
-          "title": "1",
+          "title": "Chapter 1.5: It never ends!",
           "description": "test",
-          "thumbnail": "level1.jpeg"
+          "thumbnail": "chapter-1-5.png"
         }
       ]
     },
     {
-      "name": "Advanced",
+      "name": "Chapter 2: We all know it's Erik",
       "levels": [
         {
-          "title": "1",
-          "description": "test",
-          "thumbnail": "level1.jpeg"
+          "title": "Chapter 2.1: High-per",
+          "thumbnail": "chapter-2-1.png"
         },
         {
-          "title": "1",
-          "description": "test",
-          "thumbnail": "level2.jpeg"
+          "title": "Chapter 2.2: The Drop",
+          "thumbnail": "chapter-2-2.png"
         },
         {
-          "title": "1",
-          "description": "test",
-          "thumbnail": "level3.jpeg"
+          "title": "Chapter 2.1: High-per",
+          "thumbnail": "chapter-2-1.png"
         },
         {
-          "title": "1",
-          "description": "test",
-          "thumbnail": "level1.jpeg"
+          "title": "Chapter 2.2: The Drop",
+          "thumbnail": "chapter-2-2.png"
         },
         {
-          "title": "1",
-          "description": "test",
-          "thumbnail": "level2.jpeg"
+          "title": "Chapter 2.1: High-per",
+          "thumbnail": "chapter-2-1.png"
         },
         {
-          "title": "1",
-          "description": "test",
-          "thumbnail": "level3.jpeg"
+          "title": "Chapter 2.2: The Drop",
+          "thumbnail": "chapter-2-2.png"
         },
         {
-          "title": "1",
-          "description": "test",
-          "thumbnail": "level1.jpeg"
+          "title": "Chapter 2.1: High-per",
+          "thumbnail": "chapter-2-1.png"
         },
         {
-          "title": "1",
-          "description": "test",
-          "thumbnail": "level2.jpeg"
-        },
-        {
-          "title": "1",
-          "description": "test",
-          "thumbnail": "level3.jpeg"
-        },
-        {
-          "title": "1",
-          "description": "test",
-          "thumbnail": "level1.jpeg"
+          "title": "Chapter 2.2: The Drop",
+          "thumbnail": "chapter-2-2.png"
         }
       ]
     }

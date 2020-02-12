@@ -10,7 +10,7 @@ export default class LevelSelection extends Lightning.Component {
                 rect: true, w: 1920, h: 1080, color: 0xff000000
             },
             Lists:{
-                x: 150, y: 150
+                x: 70, y: 70
             }
         }
     }
@@ -22,7 +22,7 @@ export default class LevelSelection extends Lightning.Component {
         // create lists
         const children = categories.map((el, idx)=>{
             return {
-                type: List, label: el.name, items: el.levels, y: idx*350
+                type: List, label: el.name, items: el.levels, y: idx*500
             }
         });
 

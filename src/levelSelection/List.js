@@ -1,10 +1,10 @@
 import {Lightning} from "wpe-lightning-sdk";
+import ItemWrapper from "./ItemWrapper.js";
 import Item from "./Item.js";
 
 export default class List extends Lightning.Component{
     static _template(){
         return{
-            scale:0.7,
             Label:{
                 text:{text:'', fontFace: 'Magra'}
             },
@@ -16,14 +16,6 @@ export default class List extends Lightning.Component{
 
     _init(){
         this._index = 0;
-    }
-
-    _focus(){
-        this.setSmooth("scale",1);
-    }
-
-    _unfocus(){
-        this.setSmooth("scale",0.7);
     }
 
     _handleLeft(){
@@ -40,7 +32,7 @@ export default class List extends Lightning.Component{
 
     setIndex(index){
         this._index = index;
-        this.tag("Levels").setSmooth("x", index * - 320)
+        this.tag("Levels").setSmooth("x", index * - 500)
     }
 
     set label(v){
@@ -50,7 +42,7 @@ export default class List extends Lightning.Component{
     set items(v){
         this.tag("Levels").children = v.map((el, idx)=>{
             return {
-                type: Item, image: el.thumbnail, x: idx * 320
+                type: ItemWrapper, construct: Item, item: el, x: idx * 500
             };
         });
     }

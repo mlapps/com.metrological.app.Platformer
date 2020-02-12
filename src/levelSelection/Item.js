@@ -3,7 +3,14 @@ import {Lightning, Utils} from "wpe-lightning-sdk";
 export default class Level extends Lightning.Component{
     static _template(){
         return {
-            w: 300, h: 150, alpha: 0.5
+            alpha: .5,
+            Image: {
+
+            },
+            Title: {
+                y: 310, x: 20,
+                text: {fontFace: "Magra", fontSize: 24}
+            }
         }
     }
 
@@ -12,10 +19,17 @@ export default class Level extends Lightning.Component{
     }
 
     _unfocus(){
-        this.setSmooth("alpha", 0.5);
+        this.setSmooth("alpha", .5);
     }
 
-    set image(v){
-        this.src = Utils.asset(`assets/level/${v}`);
+    set item(v){
+        this.patch({
+            Image: {
+                src: Utils.asset(`assets/chapters/${v.thumbnail}`)
+            },
+            Title: {
+                text: {text: v.title}
+            }
+        });
     }
 }
