@@ -9,13 +9,12 @@ export default class Player extends Lightning.Component {
             Overlay:{
                 w:1920, rect:true, h:300, mountY:1, y:1080, colorTop:0x00000000, colorBottom: 0xff000000
             },
-            Controls:{ alpha: 0, x:100, y:1000,
-                PlayPause:{
-                    src: Utils.asset("mediaplayer/play.png")
-                },
-                Skip:{ x: 50,
-                    src: Utils.asset("mediaplayer/skip.png")
-                },
+            Controls:{
+                /**
+                 * @todo:
+                 * - add play / pause button
+                 * - add skip button
+                 */
                 Current:{
                     type: Current, x: 150, y:7
                 }
@@ -45,64 +44,41 @@ export default class Player extends Lightning.Component {
         this.tag("MediaPlayer").videoEl.loop = loop;
     }
 
+    /**
+     * @todo:
+     *
+     * - Implement $mediaplayerPlay
+     * - Force app in Playing state
+     */
+
     stop() {
         this.tag("MediaPlayer").close();
     }
 
     /**
-     * This will be automatically called on video end
-     * @param currentTime
-     * @param duration
+     * @todo:
+     * - implement ended Event
+     * - signal videoEnded to parent
      */
-    $mediaplayerEnded() {
-        this.signal("videoEnded");
-        // clear source
-        this.tag("MediaPlayer").close();
-    }
-
-    _handleEnter(){
-        this.tag("MediaPlayer").doPause();
-    }
-
-    $mediaplayerPause() {
-        this._setState("Paused")
-    }
 
     /**
-     * This will be automatically called on video end
-     * @param currentTime
-     * @param duration
+     * @todo:
+     * - implement _handleEnter() and make the the video pause
+     * - Implement $mediaplayerPause
+     * - go to Paused state
      */
-    $mediaplayerPlay() {
-        this._setState("Playing");
-    }
+
 
     static _states(){
         return [
             class Loading extends this{
 
-            },
-            class Playing extends this{
-                $enter(){
-                    this.tag("PlayPause").src = Utils.asset("mediaplayer/pause.png");
-                }
-                /**
-                 * This will be automatically called on timeupdate
-                 * @param currentTime
-                 * @param duration
-                 */
-                $mediaplayerProgress({currentTime, duration}) {
-                    this.tag("Current").setProgress(currentTime, duration);
-                }
-            },
-            class Paused extends this{
-                $enter(){
-                    this.tag("PlayPause").src = Utils.asset("mediaplayer/play.png");
-                }
-                _handleEnter(){
-                    this.tag("MediaPlayer").doPlay();
-                }
             }
+            /**
+             * @todo:
+             *  - Add Playing state ( show static/mediaplayer/pause button on enter
+             *  - Add Paused state (show static/mediaplayer/play.png button on enter
+             */
         ]
     }
 }
@@ -120,10 +96,7 @@ class Current extends Lightning.Component{
     }
 
     setProgress(currentTime, duration) {
-        this._currentTime = currentTime;
-        this._duration = duration;
-
-        const p = currentTime / Math.max(duration, 1);
-        this.tag("Duration").setSmooth("w", p*1500 ,{timingFunction:'linear'});
+        // @todo: calculate how far de video is progressed
+        // @todo: set transition on w property of Duration component
     }
 }

@@ -13,8 +13,6 @@ import Splash from "./Splash.js";
 import Main from "./Main.js";
 import Game from "./Game.js";
 import MediaPlayer from "./MediaPlayer.js";
-import About from "./About";
-import LevelSelection from "./levelSelection/LevelSelection.js";
 
 /**
  * Every Component will extends a Lightning Component
@@ -49,16 +47,11 @@ export default class App extends Lightning.Component {
                 signals: {loaded: true}, alpha: 0
             },
             MediaPlayer: {
-                type: MediaPlayer, alpha: 0, signals: {videoEnded: "ready"}
+                type: MediaPlayer, alpha: 0,
+                // @todo: add signals for videoEnded / ready
             },
             Main: {
                 type: Main, alpha: 0, signals: {select: "menuSelect"}
-            },
-            About:{
-                type: About, alpha: 0
-            },
-            LevelSelection:{
-                type: LevelSelection, alpha: 0
             },
             Game: {
                 type: Game, alpha: 0, signals: {won: true}
@@ -136,20 +129,7 @@ export default class App extends Lightning.Component {
                  * start action / called by menu
                  */
                 start() {
-                    this._setState("Video");
-                }
-
-                /**
-                 * about action / called by menu
-                 * this is mainly to showcase substates
-                 */
-
-                about(){
-                    this._setState("Main.About");
-                }
-
-                levels(){
-                    this._setState("LevelSelection");
+                    // @todo: on start go to Video state
                 }
 
                 /**
@@ -206,24 +186,15 @@ export default class App extends Lightning.Component {
                     this._setState("Main");
                 }
             },
-            class Video extends this {
-                $enter(args, {video}={video:"http://video.metrological.com/intro.mp4"}) {
-                    this.tag("MediaPlayer").play(video, false);
-                    this.tag("MediaPlayer").setSmooth("alpha", 1);
-                }
-
-                $exit() {
-                    this.tag("MediaPlayer").setSmooth("alpha", 0);
-                }
-
-                _getFocused() {
-                    return this.tag("MediaPlayer");
-                }
-
-                ready() {
-                    this._setState("Game");
-                }
-            },
+            /**
+             * @todo:
+             *
+             * - Add Video State
+             * - on enter play the intro video: http://video.metrological.com/intro.mp4
+             * - show the Media component
+             * - change focus path to Video
+             * - implement the ready signal that forces app in Game state
+             */
             class Game extends this {
                 $enter() {
                     this.tag("Game").setSmooth("alpha", 1);
