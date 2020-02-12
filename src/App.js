@@ -129,7 +129,7 @@ export default class App extends Lightning.Component {
                  * start action / called by menu
                  */
                 start() {
-                    // @todo: on start go to Video state
+                    // @todo: go to Video State
                 }
 
                 /**
@@ -142,49 +142,6 @@ export default class App extends Lightning.Component {
                     return this.tag("Main");
                 }
 
-                /**
-                 * Define substates
-                 * @returns {Array}
-                 * @private
-                 */
-                static _states(){
-                    return [
-                        class About extends this{
-                            $enter(){
-                                this.tag("About").setSmooth("alpha",1);
-                            }
-
-                            $exit(){
-                                this.tag("About").setSmooth("alpha",0);
-                            }
-
-                            _handleBack(){
-                                this._setState("Main");
-                            }
-
-                            _getFocused(){
-                                this.tag("About");
-                            }
-                        }
-                    ]
-                }
-            },
-            class LevelSelection extends this{
-                $enter(){
-                    this.tag("LevelSelection").setSmooth("alpha",1);
-                }
-
-                $exit(){
-                    this.tag("LevelSelection").setSmooth("alpha",0);
-                }
-
-                _getFocused(){
-                    return this.tag("LevelSelection");
-                }
-
-                _handleBack(){
-                    this._setState("Main");
-                }
             },
             /**
              * @todo:
