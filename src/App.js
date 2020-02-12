@@ -13,8 +13,6 @@ import Splash from "./Splash.js";
 import Main from "./Main.js";
 import Game from "./Game.js";
 import MediaPlayer from "./MediaPlayer.js";
-import About from "./About";
-import LevelSelection from "./levelSelection/LevelSelection.js";
 
 /**
  * Every Component will extends a Lightning Component
@@ -31,8 +29,7 @@ export default class App extends Lightning.Component {
      */
     static getFonts() {
         return [
-            {family: 'Magra', url: Utils.asset('fonts/Magra-Bold.ttf'), descriptor: {}},
-            {family: 'Roboto', url: Utils.asset('fonts/Roboto-Regular.ttf'), descriptor: {}}
+            {family: 'Magra', url: Utils.asset('fonts/Magra-Bold.ttf'), descriptor: {}}
         ];
     }
 
@@ -53,12 +50,6 @@ export default class App extends Lightning.Component {
             },
             Main: {
                 type: Main, alpha: 0, signals: {select: "menuSelect"}
-            },
-            About:{
-                type: About, alpha: 0
-            },
-            LevelSelection:{
-                type: LevelSelection, alpha: 0
             },
             Game: {
                 type: Game, alpha: 0, signals: {won: true}
@@ -139,18 +130,6 @@ export default class App extends Lightning.Component {
                     this._setState("Video");
                 }
 
-                /**
-                 * about action / called by menu
-                 * this is mainly to showcase substates
-                 */
-
-                about(){
-                    this._setState("Main.About");
-                }
-
-                levels(){
-                    this._setState("LevelSelection");
-                }
 
                 /**
                  * Tell Lightning which component is the active component
@@ -160,50 +139,6 @@ export default class App extends Lightning.Component {
                  */
                 _getFocused() {
                     return this.tag("Main");
-                }
-
-                /**
-                 * Define substates
-                 * @returns {Array}
-                 * @private
-                 */
-                static _states(){
-                    return [
-                        class About extends this{
-                            $enter(){
-                                this.tag("About").setSmooth("alpha",1);
-                            }
-
-                            $exit(){
-                                this.tag("About").setSmooth("alpha",0);
-                            }
-
-                            _handleBack(){
-                                this._setState("Main");
-                            }
-
-                            _getFocused(){
-                                this.tag("About");
-                            }
-                        }
-                    ]
-                }
-            },
-            class LevelSelection extends this{
-                $enter(){
-                    this.tag("LevelSelection").setSmooth("alpha",1);
-                }
-
-                $exit(){
-                    this.tag("LevelSelection").setSmooth("alpha",0);
-                }
-
-                _getFocused(){
-                    return this.tag("LevelSelection");
-                }
-
-                _handleBack(){
-                    this._setState("Main");
                 }
             },
             class Video extends this {
