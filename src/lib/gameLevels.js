@@ -5,6 +5,9 @@ export default [
       movie:'intro.mp4',
       layout: [
           "             i                                        i           ",
+          "             i                                        i           ",
+          "             i                                        i           ",
+          "             i                                        i           ",
           "             i                      o c c c c o       i      c    ",
           "   @         i                    (xxxxxxxxxxxxx)     i     c     ",
           "xxxxxx)  c   i                    i            i   c  i    c      ",
