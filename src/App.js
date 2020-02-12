@@ -126,6 +126,7 @@ export default class App extends Lightning.Component {
                 /**
                  * start action / called by menu
                  */
+                // @todo: just skip the video and go to Game state, it's faster for testing
                 start() {
                     this._setState("Video");
                 }

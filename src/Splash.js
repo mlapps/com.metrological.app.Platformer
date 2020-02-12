@@ -21,6 +21,7 @@ export default class Splash extends Lightning.Component {
 
     _init(){
         this._pulse = this.animation({
+            // @todo: change duration to 0.1 if you don't want to wait for a second / or signal loaded directly
             duration: 1, repeat: 3, actions:[
                 {t: 'Carrot', p:'rotation', v:{0: 0, 1: Math.PI * 2}}
             ]
