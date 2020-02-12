@@ -34,7 +34,6 @@ export default class ItemWrapper extends Lightning.Component {
     }
 
     create() {
-        console.log("created");
         const item = this._item;
         this.children = [{type: this._construct, item}];
 
