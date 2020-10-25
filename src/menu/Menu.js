@@ -1,4 +1,4 @@
-import { Lightning, Utils } from "wpe-lightning-sdk";
+import { Lightning, Utils } from "@lightningjs/sdk";
 import Item from "./Item.js";
 
 export default class Menu extends Lightning.Component{

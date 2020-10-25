@@ -1,5 +1,5 @@
 import Vector from "../lib/Vector";
-import {Lightning, Utils} from "wpe-lightning-sdk";
+import {Lightning, Utils} from "@lightningjs/sdk";
 
 export default class Mole extends Lightning.Component {
 

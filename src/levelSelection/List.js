@@ -1,4 +1,4 @@
-import {Lightning} from "wpe-lightning-sdk";
+import {Lightning} from "@lightningjs/sdk";
 import ItemWrapper from "./ItemWrapper.js";
 import Item from "./Item.js";
 

@@ -1,4 +1,4 @@
-import {Lightning, MediaPlayer, Utils} from "wpe-lightning-sdk";
+import {Lightning, MediaPlayer, Utils} from "@lightningjs/sdk";
 
 export default class Player extends Lightning.Component {
     static _template() {

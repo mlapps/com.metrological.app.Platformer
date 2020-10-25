@@ -1,4 +1,4 @@
-import {Lightning, Utils} from "wpe-lightning-sdk";
+import {Lightning, Utils} from "@lightningjs/sdk";
 import Vector from "../lib/Vector";
 
 export default class Plant extends Lightning.Component {
