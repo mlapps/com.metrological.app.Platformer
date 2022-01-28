@@ -1,5 +1,5 @@
 import {Level, Assets, Player, Lives, CarrotsLeft} from "./components";
-import {Lightning, Settings, Utils} from "wpe-lightning-sdk";
+import {Lightning, Settings, Utils} from "@lightningjs/sdk";
 import levels from "./lib/gameLevels";
 
 

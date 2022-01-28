@@ -1,4 +1,4 @@
-import { Utils} from "wpe-lightning-sdk";
+import { Utils} from "@lightningjs/sdk";
 import {Floor} from "./";
 
 export default class FloorRight extends Floor {

@@ -1,4 +1,4 @@
-import { Lightning, Utils } from "wpe-lightning-sdk";
+import { Lightning, Utils } from "@lightningjs/sdk";
 
 import List from "./List.js";
 

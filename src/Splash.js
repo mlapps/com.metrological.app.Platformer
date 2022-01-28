@@ -1,4 +1,4 @@
-import { Lightning, Utils } from "wpe-lightning-sdk";
+import { Lightning, Utils } from "@lightningjs/sdk";
 
 export default class Splash extends Lightning.Component {
 

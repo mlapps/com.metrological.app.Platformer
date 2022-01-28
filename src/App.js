@@ -3,7 +3,7 @@
  * https://github.com/WebPlatformForEmbedded/Lightning-SDK
  *
  */
-import {Lightning, Utils} from "wpe-lightning-sdk";
+import {Lightning, Utils} from "@lightningjs/sdk";
 
 /**
  * Import all the Components that we need in our App
