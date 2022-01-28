@@ -1,3 +1,14 @@
+### Lightning Platform Game
+
+This app was created to be used during (online) Lightning training sessions. The goal is to learn the different
+parts of Lightning while developing a game.
+
+You can find the other app (the movie database) that we've build during the online session [here](https://github.com/mlapps/com.metrological.app.TMDB)
+
+##### questions?
+
+Feel free to ask them at: https://forum.lightningjs.io/
+
 ### Getting started
 
 > Before you follow the steps below, make sure you have the
